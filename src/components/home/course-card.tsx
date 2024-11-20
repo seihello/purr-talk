@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Image, TouchableHighlight, View } from "react-native";
+import { Alert, TouchableHighlight, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ProgressType from "../../../enums/progress-type";
 import Progress from "../../enum/progress.enum";
@@ -9,13 +9,13 @@ import WordInfo from "../../types/word-info.type";
 import Text from "../ui/text";
 import ProgressBar, { ColorType } from "../word/progress-bar";
 
-const PHASE_IMAGES = {
-  1: require(`../../../assets/img/phases/1.png`),
-  2: require(`../../../assets/img/phases/2.png`),
-  3: require(`../../../assets/img/phases/3.png`),
-  4: require(`../../../assets/img/phases/4.png`),
-  5: require(`../../../assets/img/phases/5.png`),
-};
+// const PHASE_IMAGES = {
+//   1: require(`../../../assets/img/phases/1.png`),
+//   2: require(`../../../assets/img/phases/2.png`),
+//   3: require(`../../../assets/img/phases/3.png`),
+//   4: require(`../../../assets/img/phases/4.png`),
+//   5: require(`../../../assets/img/phases/5.png`),
+// };
 
 type Props = {
   navigation: any;
@@ -68,7 +68,7 @@ export default function CourseCard({
         className="h-full w-full grow"
       >
         <View className="flex w-full grow flex-row items-center justify-between overflow-hidden rounded-xl border border-primary-300 bg-primary-100">
-          <Image
+          {/* <Image
             source={
               phase.id === 0
                 ? PHASE_IMAGES[1]
@@ -81,7 +81,7 @@ export default function CourseCard({
                       : PHASE_IMAGES[5]
             }
             className="h-[90px] w-[90px]"
-          />
+          /> */}
           <View className="flex w-1 grow flex-row items-center justify-between gap-x-3 py-2 pl-4 pr-3">
             <View className="flex grow flex-col">
               <Text className="font-dm-bold text-lg">{phase.name}</Text>
