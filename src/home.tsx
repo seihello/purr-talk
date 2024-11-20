@@ -22,12 +22,12 @@ export default function HomePage(props: any) {
         </View> */}
         <View className="absolute left-12 top-20 w-[180px]">
           <View className="flex h-12 flex-col justify-center">
-            <Text className="font-dm-bold text-[32px] text-white">
+            <Text className="font-nunito-semibold text-[32px] text-white">
               {/* Welcome, Lisa! */}
               Hi!
             </Text>
           </View>
-          <Text className="mt-2 font-dm-bold text-lg leading-[20.83px] text-white">
+          <Text className="font-nunito-bold mt-2 text-lg font-bold leading-[20.83px] text-white">
             What do you want to learn today?
           </Text>
         </View>

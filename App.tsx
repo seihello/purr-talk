@@ -11,13 +11,9 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    Roboto: require("./assets/fonts/Roboto-Regular.ttf"),
-    RobotoBold: require("./assets/fonts/Roboto-Bold.ttf"),
-    RobotoItalic: require("./assets/fonts/Roboto-Italic.ttf"),
-    RobotoBoldItalic: require("./assets/fonts/Roboto-BoldItalic.ttf"),
-    DMSans: require("./assets/fonts/DMSans-Regular.ttf"),
-    DMSansBold: require("./assets/fonts/DMSans-Bold.ttf"),
-    Caveat: require("./assets/fonts/Caveat-VariableFont_wght.ttf"),
+    Nunito: require("./assets/fonts/Nunito-Regular.ttf"),
+    NunitoSemiBold: require("./assets/fonts/Nunito-SemiBold.ttf"),
+    NunitoBOld: require("./assets/fonts/Nunito-Bold.ttf"),
   });
 
   // const [headerTitle, setHeaderTitle] = useState("");
