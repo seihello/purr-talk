@@ -13,6 +13,17 @@ A mobile application that translates cats' voice into human languages.
 [![Technology](https://skillicons.dev/icons?i=ts,react,tailwind,postgres,supabase)](https://skillicons.dev)
 
 ## Setup
+1. Upgrade SDK
+```
+npx expo upgrade
+```
+Select v51
+
+1. Start the app with simulator
+```
+npx expo start
+```
+
 1. Update version in app.json
 1. Build app
 ```
