@@ -33,7 +33,7 @@ export default function CategoryChips({
             }`}
           >
             <Text
-              className={`font-dm-bold ${
+              className={`font-nunito-bold ${
                 selectedCategoryId === -1
                   ? "text-primary-100"
                   : "text-primary-900"
@@ -58,7 +58,7 @@ export default function CategoryChips({
               }`}
             >
               <Text
-                className={`font-dm-bold ${
+                className={`font-nunito-bold ${
                   category.id === selectedCategoryId
                     ? "text-primary-100"
                     : "text-primary-900"

@@ -12,7 +12,7 @@ export default function Button({ title, onPress, className, ...rest }: Props) {
   return (
     <TouchableOpacity
       onPress={onPress}
-      className={"flex h-12 w-full items-center justify-center rounded-full".concat(
+      className={"flex h-12 w-full items-center justify-center rounded-[52px]".concat(
         className || "",
       )}
       activeOpacity={0.8}
@@ -20,7 +20,7 @@ export default function Button({ title, onPress, className, ...rest }: Props) {
     >
       <Text
         className={
-          "flex w-auto flex-row items-center justify-center font-dm-bold text-base text-white"
+          "flex w-auto flex-row items-center justify-center font-nunito-bold text-base text-white"
         }
       >
         {title}

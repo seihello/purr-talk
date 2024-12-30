@@ -78,7 +78,9 @@ export default function HomeMainPanel({ navigation }: any) {
 
   return (
     <View className="flex flex-col items-center rounded-[40px] bg-white px-5 pb-8 pt-2">
-      <Text className="my-6 font-dm-bold text-[28px]">Vocab being learned</Text>
+      <Text className="my-6 font-nunito-bold text-[28px]">
+        Vocab being learned
+      </Text>
       {isLoadingInitialData ? (
         <CourseCardsSkeleton />
       ) : (

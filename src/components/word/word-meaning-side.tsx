@@ -61,7 +61,7 @@ export default function WordMeaningSide({
   return (
     <View className="items-between flex flex-col space-y-4 rounded-2xl border-[1px] border-gray-200 bg-white px-8 pb-8 pt-10">
       <View className="flex flex-col items-center">
-        <Text className="font-dm-bold text-[32px] leading-[41.66px] text-gray-900">
+        <Text className="font-nunito-bold text-[32px] leading-[41.66px] text-gray-900">
           {word.title}
         </Text>
         <Text className="font-roboto-italic tracking-wide text-primary-900">
@@ -70,7 +70,7 @@ export default function WordMeaningSide({
       </View>
 
       <View className="flex flex-col gap-y-2">
-        <Text className="w-full text-left font-dm-bold text-base text-gray-700">
+        <Text className="w-full text-left font-nunito-bold text-base text-gray-700">
           [{word.parts.join(" / ")}]
         </Text>
         <Text className="font-roboto leading-[20px] text-gray-900">
@@ -80,7 +80,7 @@ export default function WordMeaningSide({
 
       {word.synonyms.length > 0 && (
         <View className="flex flex-col gap-y-2">
-          <Text className="w-full text-left font-dm-bold text-base text-gray-700">
+          <Text className="w-full text-left font-nunito-bold text-base text-gray-700">
             Synonym
           </Text>
 
@@ -93,7 +93,7 @@ export default function WordMeaningSide({
       )}
 
       <View className="flex flex-col gap-y-2">
-        <Text className="w-full text-left font-dm-bold text-base text-gray-700">
+        <Text className="w-full text-left font-nunito-bold text-base text-gray-700">
           Example
         </Text>
         {word.sentences.map((sentence: string, index: number) => (

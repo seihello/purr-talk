@@ -9,7 +9,9 @@ export default function Chip(props: any) {
       className="flex items-center justify-center rounded-full bg-primary-100 px-2 py-1 "
       {...rest}
     >
-      <Text className="font-dm-bold text-sm text-primary-900">{children}</Text>
+      <Text className="font-nunito-bold text-sm text-primary-900">
+        {children}
+      </Text>
     </View>
   );
 }

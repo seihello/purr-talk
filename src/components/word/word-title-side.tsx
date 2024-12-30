@@ -12,7 +12,7 @@ type Props = {
 export default function WordTitleSide({ word, showMeaning }: Props) {
   return (
     <View className="relative flex flex-col items-center justify-between rounded-2xl border-[1px] border-gray-200 bg-primary-100 px-8">
-      <Text className="my-10 font-dm-bold text-[32px] leading-[41.66px]">
+      <Text className="my-10 font-nunito-bold text-[32px] leading-[41.66px]">
         {word.title}
       </Text>
       <Button

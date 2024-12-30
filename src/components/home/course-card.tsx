@@ -84,7 +84,7 @@ export default function CourseCard({
           /> */}
           <View className="flex w-1 grow flex-row items-center justify-between gap-x-3 py-2 pl-4 pr-3">
             <View className="flex grow flex-col">
-              <Text className="font-dm-bold text-lg">{phase.name}</Text>
+              <Text className="font-nunito-bold text-lg">{phase.name}</Text>
               <ProgressBar
                 type={ProgressType.Mastered}
                 colorType={ColorType.White}

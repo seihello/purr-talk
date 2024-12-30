@@ -13,7 +13,7 @@ export default function App() {
   const [fontsLoaded] = useFonts({
     Nunito: require("./assets/fonts/Nunito-Regular.ttf"),
     NunitoSemiBold: require("./assets/fonts/Nunito-SemiBold.ttf"),
-    NunitoBOld: require("./assets/fonts/Nunito-Bold.ttf"),
+    NunitoBold: require("./assets/fonts/Nunito-Bold.ttf"),
   });
 
   // const [headerTitle, setHeaderTitle] = useState("");
