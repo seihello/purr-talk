@@ -5,7 +5,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomePage from "./src/home";
 import InitPage from "./src/init";
-import WordPage from "./src/word";
+import IntroductionPage from "./src/introduction";
+import ProfileInputPage from "./src/profile-input";
+import ProfileReadyPage from "./src/profile-ready";
+import TranslatePage from "./src/translate";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,11 +31,27 @@ export default function App() {
           component={InitPage}
           options={{
             headerShown: false,
-            // title: "",
-            // headerStyle: {
-            //   backgroundColor: "#239CAC",
-            // },
-            // headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="ProfileInput"
+          component={ProfileInputPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="ProfileReady"
+          component={ProfileReadyPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Introduction"
+          component={IntroductionPage}
+          options={{
+            headerShown: false,
           }}
         />
         <Stack.Screen
@@ -40,23 +59,18 @@ export default function App() {
           component={HomePage}
           options={{
             headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Translate"
+          component={TranslatePage}
+          options={{
+            headerShown: false,
             // title: "",
             // headerStyle: {
             //   backgroundColor: "#239CAC",
             // },
             // headerShadowVisible: false,
-          }}
-        />
-        <Stack.Screen
-          name="Word"
-          component={WordPage}
-          options={{
-            headerShadowVisible: false,
-            headerTintColor: "#239CAC",
-            headerTitleStyle: {
-              color: "#000000",
-              fontFamily: "DMSansBold",
-            },
           }}
         />
       </Stack.Navigator>

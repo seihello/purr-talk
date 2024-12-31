@@ -24,7 +24,7 @@ export default function InitPage({ navigation }: any) {
       <Button
         title="Get started"
         onPress={() => {
-          navigation.push("Profile");
+          navigation.push("ProfileInput");
         }}
         className="bg-primary-900"
       />

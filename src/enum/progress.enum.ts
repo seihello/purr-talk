@@ -1,8 +1,10 @@
-enum Progress {
-  New = "New",
-  Mastered = "Mastered",
-  Reviewing = "Reviewing",
-  Learning = "Learning",
+enum FurColor {
+  Tuxedo = "Tuxedo",
+  BrownTabby = "Brown Tabby",
+  SolidWhite = "Solid White",
+  SolidBlack = "Solid Black",
+  Calico = "Calico",
+  BlackWhiteTabby = "Black and White Tabby",
 }
 
-export default Progress;
+export default FurColor;
