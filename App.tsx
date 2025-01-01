@@ -8,7 +8,8 @@ import InitPage from "./src/init";
 import IntroductionPage from "./src/introduction";
 import ProfileInputPage from "./src/profile-input";
 import ProfileReadyPage from "./src/profile-ready";
-import TranslatePage from "./src/translate";
+import RecordPage from "./src/record";
+import TranslationPage from "./src/translation";
 
 const Stack = createNativeStackNavigator();
 
@@ -62,15 +63,33 @@ export default function App() {
           }}
         />
         <Stack.Screen
-          name="Translate"
-          component={TranslatePage}
+          name="Record"
+          component={RecordPage}
           options={{
-            headerShown: false,
-            // title: "",
-            // headerStyle: {
-            //   backgroundColor: "#239CAC",
-            // },
-            // headerShadowVisible: false,
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: "#4651D1",
+            },
+            headerTintColor: "white",
+            headerTitleStyle: {
+              color: "white",
+              fontFamily: "NunitoSemiBold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Translation"
+          component={TranslationPage}
+          options={{
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: "#E8E7F7",
+            },
+            headerTintColor: "#4651D1",
+            headerTitleStyle: {
+              color: "black",
+              fontFamily: "NunitoSemiBold",
+            },
           }}
         />
       </Stack.Navigator>

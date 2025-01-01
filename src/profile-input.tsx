@@ -68,7 +68,7 @@ export default function ProfileInputPage({ navigation }: any) {
       <Button
         title="Get started"
         onPress={onPress}
-        className="mt-8 bg-primary-900"
+        className="mt-8"
         disabled={!name || !catName || !furColor}
       />
     </View>

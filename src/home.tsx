@@ -25,9 +25,8 @@ export default function HomePage({ navigation }: any) {
           <Button
             title="Start recording"
             onPress={() => {
-              navigation.push("Translate");
+              navigation.push("Record");
             }}
-            className="bg-primary-900"
           />
         </View>
       </View>

@@ -26,7 +26,6 @@ export default function InitPage({ navigation }: any) {
         onPress={() => {
           navigation.push("ProfileInput");
         }}
-        className="bg-primary-900"
       />
     </View>
   );

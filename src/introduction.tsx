@@ -12,7 +12,6 @@ export default function IntroductionPage({ navigation }: any) {
         onPress={() => {
           navigation.push("Home");
         }}
-        className="bg-primary-900"
       />
     </View>
   );

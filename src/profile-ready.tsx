@@ -17,7 +17,6 @@ export default function ProfileReadyPage({ navigation }: any) {
         onPress={() => {
           navigation.push("Introduction");
         }}
-        className="bg-primary-900"
       />
     </View>
   );
