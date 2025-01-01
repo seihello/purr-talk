@@ -17,10 +17,25 @@ export default function RecordPage({ navigation }: any) {
 
     // TODO: Call API to translate the voice
     await new Promise((resolve) => setTimeout(resolve, 5000));
+    const response = await fetch(
+      "https://purr-talk-server.vercel.app/api/get-random-number",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          length: Math.floor(Math.random() * (50 - 10 + 1)) + 10,
+        }),
+      },
+    );
+    const { data } = await response.json();
+    console.log("data", data);
 
     navigation.replace("Translation", {
-      translation:
-        "Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some!",
+      // translation:
+      //   "Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some!",
+      translation: data,
     });
   };
 
