@@ -1,9 +1,14 @@
 import { Text as ReactNativeText } from "react-native";
 
-export default function Text(props: any) {
-  const { ...rest } = props;
+type Props = {
+  children: React.ReactNode;
+  className?: string;
+};
 
+export default function Text({ children, className = "", ...rest }: Props) {
   return (
-    <ReactNativeText className={"font-nunito"} {...rest}></ReactNativeText>
+    <ReactNativeText className={"font-nunito".concat(className)} {...rest}>
+      {children}
+    </ReactNativeText>
   );
 }
