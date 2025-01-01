@@ -4,11 +4,21 @@ import RNPickerSelect from "react-native-picker-select";
 import Button from "./components/ui/button";
 import Text from "./components/ui/text";
 import FurColor from "./enum/progress.enum";
+import updateProfile from "./lib/progress/update-profile";
 
 export default function ProfileInputPage({ navigation }: any) {
   const [name, setName] = useState<string>("");
   const [catName, setCatName] = useState<string>("");
-  const [furColor, setFurColor] = useState<FurColor>(FurColor.Tuxedo);
+  const [furColor, setFurColor] = useState<FurColor>();
+
+  console.log("FurColor", furColor);
+
+  const onPress = async () => {
+    if (name && catName && furColor) {
+      await updateProfile(name, catName, furColor);
+      navigation.push("ProfileReady");
+    }
+  };
   return (
     <View className="flex h-screen w-screen flex-col items-stretch px-8 pb-16 pt-32">
       <Text className="font-nunito-bold text-4xl">
@@ -26,15 +36,18 @@ export default function ProfileInputPage({ navigation }: any) {
       <TextInput
         placeholder="Your Cat's Name"
         editable
-        onChangeText={(value) => setName(value)}
+        onChangeText={(value) => setCatName(value)}
         className="text-md h-[44px] w-full rounded-full border-[1px] border-gray-200 bg-white px-4 text-[16px]"
       />
       <Text className="mb-1 mt-6">Fur Color</Text>
       <RNPickerSelect
-        onValueChange={(value) => console.log(value)}
+        onValueChange={(value) =>
+          setFurColor(FurColor[value as keyof typeof FurColor])
+        }
         items={Object.keys(FurColor).map((color, index) => ({
           label: String(FurColor[color as keyof typeof FurColor]),
           value: color,
+          key: index,
         }))}
         style={{
           inputIOS: {
@@ -44,19 +57,19 @@ export default function ProfileInputPage({ navigation }: any) {
             borderWidth: 1,
             borderColor: "#E2E5E7",
             borderRadius: 100,
-            color: "white",
+            color: "black",
             backgroundColor: "white",
             paddingRight: 30, // to ensure the text is always visible
           },
         }}
+        placeholder={{ label: "Select Fur Color", value: null }}
       />
 
       <Button
         title="Get started"
-        onPress={() => {
-          navigation.push("ProfileReady");
-        }}
+        onPress={onPress}
         className="mt-8 bg-primary-900"
+        disabled={!name || !catName || !furColor}
       />
     </View>
   );
