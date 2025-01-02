@@ -8,7 +8,7 @@ enum Status {
   Translating,
 }
 
-const PAWS_NUM = 12;
+const PAWS_NUM = 14;
 
 export default function RecordPage({ navigation }: any) {
   const [status, setStatus] = useState(Status.Recording);
@@ -141,7 +141,7 @@ function getPawCoordinates(
   const radius = diameter / 2;
 
   // Calculate the angle for the current icon
-  const angle = ((2 * Math.PI) / PAWS_NUM) * index;
+  const angle = ((2 * Math.PI) / PAWS_NUM) * index - Math.PI / 2;
 
   // Calculate the icon's coordinates
   const x = radius + radius * Math.cos(angle) + (screenWidth - diameter) / 2;
