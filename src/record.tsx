@@ -103,7 +103,11 @@ export default function RecordPage({ navigation }: any) {
                 style={{
                   left: paw.x,
                   top: paw.y,
-                  transform: [{ translateX: -16 }, { translateY: -16 }],
+                  transform: [
+                    { translateX: -16 },
+                    { translateY: -16 },
+                    { rotate: `${90 + 360 * (i / PAWS_NUM)}deg` },
+                  ],
                 }}
               >
                 <Icon name="paw" color="white" size={32} />
