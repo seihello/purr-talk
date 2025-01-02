@@ -4,14 +4,21 @@ import Profile from "../types/profile.type";
 
 export default function useProfile() {
   const [profile, setProfile] = useState<Profile>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const run = async () => {
-      const profile = await getProfile();
-      setProfile(profile);
+      try {
+        const profile = await getProfile();
+        setProfile(profile);
+      } catch (error) {
+        console.log("Profile not set");
+      } finally {
+        setIsLoading(false);
+      }
     };
     run();
   }, []);
 
-  return profile;
+  return { profile, isLoading };
 }

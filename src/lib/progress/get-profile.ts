@@ -8,6 +8,6 @@ export default async function getProfile(): Promise<Profile> {
     });
     return profile;
   } catch (error: any) {
-    return error;
+    throw error;
   }
 }

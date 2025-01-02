@@ -5,7 +5,7 @@ import Text from "./components/ui/text";
 import useProfile from "./hooks/use-profile";
 
 export default function ProfileReadyPage({ navigation }: any) {
-  const profile = useProfile();
+  const { profile } = useProfile();
 
   if (!profile) return;
 

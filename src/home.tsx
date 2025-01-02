@@ -6,7 +6,7 @@ import Text from "./components/ui/text";
 import useProfile from "./hooks/use-profile";
 
 export default function HomePage({ navigation }: any) {
-  const profile = useProfile();
+  const { profile } = useProfile();
 
   if (!profile) return;
   return (

@@ -4,6 +4,7 @@ import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomePage from "./src/home";
+import useProfile from "./src/hooks/use-profile";
 import InitPage from "./src/init";
 import IntroductionPage from "./src/introduction";
 import ProfileInputPage from "./src/profile-input";
@@ -20,13 +21,17 @@ export default function App() {
     NunitoBold: require("./assets/fonts/Nunito-Bold.ttf"),
   });
 
+  const { profile, isLoading } = useProfile();
+
   // const [headerTitle, setHeaderTitle] = useState("");
 
-  if (!fontsLoaded) return null;
+  if (!fontsLoaded || isLoading) return null;
+
+  console.log("profile", profile);
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Init">
+      <Stack.Navigator initialRouteName={profile ? "Home" : "Init"}>
         <Stack.Screen
           name="Init"
           component={InitPage}
