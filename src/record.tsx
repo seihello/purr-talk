@@ -10,24 +10,24 @@ enum Status {
 
 const PAWS_NUM = 14;
 
-export default function RecordPage({ navigation }: any) {
+export default function RecordPage({ navigation, route }: any) {
   const [status, setStatus] = useState(Status.Recording);
 
   const { width } = Dimensions.get("window");
   // console.log("width", width);
 
   const [numPaws, setNumPaws] = useState(0);
+  const [translation, setTranslation] = useState("");
 
   const paws = [...Array(numPaws)].map((_, i) => {
     const { x, y } = getPawCoordinates(i, width);
     return { x, y };
   });
 
-  console.log("paws", paws);
-
   useEffect(() => {
+    let interval: any;
     if (status === Status.Translating) {
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         setNumPaws((prevNumPaws) => {
           if (prevNumPaws === PAWS_NUM) {
             return 1;
@@ -35,15 +35,32 @@ export default function RecordPage({ navigation }: any) {
           return prevNumPaws + 1;
         });
       }, 200);
-      return () => clearInterval(interval);
     }
+    return () => clearInterval(interval);
   }, [status]);
+
+  // useEffect(() => {
+  //   if (route.name !== "Record") {
+  //     setNumPaws(0);
+  //   }
+  // }, [route.name]);
+
+  useEffect(() => {
+    if (status === Status.Translating && translation) {
+      navigation.replace("Translation", {
+        // translation:
+        //   "Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some!",
+        translation: translation,
+      });
+    }
+  }, [status, translation]);
 
   const translate = async () => {
     setStatus(Status.Translating);
 
     // TODO: Call API to translate the voice
-    await new Promise((resolve) => setTimeout(resolve, 30000));
+    await new Promise((resolve) => setTimeout(resolve, 10000));
+
     const response = await fetch(
       "https://purr-talk-server.vercel.app/api/get-random-number",
       {
@@ -58,12 +75,7 @@ export default function RecordPage({ navigation }: any) {
     );
     const { data } = await response.json();
     console.log("data", data);
-
-    navigation.replace("Translation", {
-      // translation:
-      //   "Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some!",
-      translation: data,
-    });
+    setTranslation(data);
   };
 
   switch (status) {
