@@ -31,7 +31,8 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={profile ? "Home" : "Init"}>
+      {/* <Stack.Navigator initialRouteName={profile ? "Home" : "Init"}> */}
+      <Stack.Navigator initialRouteName={"Init"}>
         <Stack.Screen
           name="Init"
           component={InitPage}
