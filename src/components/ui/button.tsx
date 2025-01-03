@@ -29,9 +29,9 @@ export default function Button({
           : variant === "outline"
             ? "bg-white"
             : "bg-[#E8E8E8]"
-      } ${disabled && variant !== "upcoming" ? "opacity-50" : ""}`.concat(
-        className || "",
-      )}
+      } ${variant === "outline" ? "border-[1px] border-primary-900" : ""} ${
+        disabled && variant !== "upcoming" ? "opacity-50" : ""
+      }`.concat(className || "")}
       activeOpacity={0.8}
       disabled={disabled}
       {...rest}

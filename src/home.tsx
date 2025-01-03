@@ -3,24 +3,8 @@ import { Dimensions, Image, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Button from "./components/ui/button";
 import Text from "./components/ui/text";
-import FurColor from "./enum/fur-color.enum";
 import useProfile from "./hooks/use-profile";
-
-const CAT_IMAGES: { [key: string]: any } = {};
-CAT_IMAGES[String(FurColor.Tuxedo)] = require("../assets/img/cats/tuxedo.png");
-CAT_IMAGES[
-  String(FurColor.BrownTabby)
-] = require("../assets/img/cats/brown_tabby.png");
-CAT_IMAGES[
-  String(FurColor.SolidBlack)
-] = require("../assets/img/cats/solid_black.png");
-CAT_IMAGES[
-  String(FurColor.SolidWhite)
-] = require("../assets/img/cats/solid_white.png");
-CAT_IMAGES[String(FurColor.Calico)] = require("../assets/img/cats/calico.png");
-CAT_IMAGES[
-  String(FurColor.BlackWhiteTabby)
-] = require("../assets/img/cats/black_white_tabby.png");
+import CAT_IMAGES from "./lib/cats/cat-images";
 
 export default function HomePage({ navigation }: any) {
   const { width } = Dimensions.get("window");
