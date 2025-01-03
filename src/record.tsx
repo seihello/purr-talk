@@ -3,6 +3,7 @@ import { Dimensions, Image, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Button from "./components/ui/button";
 import Text from "./components/ui/text";
+import useProfile from "./hooks/use-profile";
 enum Status {
   Recording,
   Translating,
@@ -12,10 +13,11 @@ const PAWS_NUM = 13;
 const PAWS_CIRCLE_WIDTH = 0.5;
 
 export default function RecordPage({ navigation, route }: any) {
-  const [status, setStatus] = useState(Status.Recording);
-
   const { width } = Dimensions.get("window");
   // console.log("width", width);
+
+  const { profile } = useProfile();
+  const [status, setStatus] = useState(Status.Recording);
 
   const [numPaws, setNumPaws] = useState(0);
   const [translation, setTranslation] = useState("");
@@ -69,14 +71,15 @@ export default function RecordPage({ navigation, route }: any) {
     await new Promise((resolve) => setTimeout(resolve, 10000));
 
     const response = await fetch(
-      "https://purr-talk-server.vercel.app/api/get-random-number",
+      "https://purr-talk-server.vercel.app/api/translate",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          length: Math.floor(Math.random() * (50 - 10 + 1)) + 10,
+          humanName: profile?.name || "Human",
+          catName: profile?.catName || "Cat",
         }),
       },
     );
