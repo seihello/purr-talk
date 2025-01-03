@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "PurrTalk",
-    "slug": "purr-talk",
+    "slug": "purrtalk",
     "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,7 +27,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "d9a72bcc-4b49-43e3-bea5-006f18cb2851"
+        "projectId": "702b3eb2-f5ca-4511-a8f7-2cac221fa111"
       }
     }
   }
