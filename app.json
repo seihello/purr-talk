@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#4651D1"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.purrtalk"
@@ -27,8 +29,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "702b3eb2-f5ca-4511-a8f7-2cac221fa111"
+        "projectId": "73a53d4a-7c44-4818-9730-2a22c0b5beba"
       }
-    }
+    },
+    "owner": "seihello"
   }
 }
