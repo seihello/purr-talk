@@ -1,4 +1,4 @@
-import FurColor from "../enum/progress.enum";
+import FurColor from "../enum/fur-color.enum";
 
 type Profile = {
   name: string;

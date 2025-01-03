@@ -1,4 +1,4 @@
-import FurColor from "../../enum/progress.enum";
+import FurColor from "../../enum/fur-color.enum";
 import storage from "../local-storage";
 
 export default async function updateProfile(

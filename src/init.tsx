@@ -1,6 +1,5 @@
 import React from "react";
 import { Dimensions, Image, View } from "react-native";
-import PurrTalkTextImage from "../assets/img/purr-talk-text-image";
 import Button from "./components/ui/button";
 import Text from "./components/ui/text";
 
@@ -22,11 +21,11 @@ export default function InitPage({ navigation }: any) {
         <Text className="mb-1 text-center font-nunito-bold text-[36px] leading-[41.66px] text-gray-900">
           Welcome to
         </Text>
-        <PurrTalkTextImage
-          width={PURR_TALK_TEXT_IMAGE_WIDTH}
-          height={35 * (PURR_TALK_TEXT_IMAGE_WIDTH / 193)}
+        <Image
+          source={require(`../assets/img/purr_talk_primary.png`)}
           style={{
-            transform: `scale(${PURR_TALK_TEXT_IMAGE_WIDTH / 193})`,
+            width: 193,
+            height: 35,
           }}
         />
         <Text className="mt-8 text-center text-[18px] text-gray-700">

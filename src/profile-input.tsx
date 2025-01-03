@@ -7,7 +7,7 @@ import PrivacyPolicy from "./components/profile-input/privacy-policy";
 import TermsAndConditions from "./components/profile-input/terms-and-conditions";
 import Button from "./components/ui/button";
 import Text from "./components/ui/text";
-import FurColor from "./enum/progress.enum";
+import FurColor from "./enum/fur-color.enum";
 import updateProfile from "./lib/progress/update-profile";
 
 export default function ProfileInputPage({ navigation }: any) {
