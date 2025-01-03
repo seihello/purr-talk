@@ -40,14 +40,14 @@ export default function HomePage({ navigation }: any) {
         />
         <Text className="mt-2 font-nunito-semibold text-[22px] text-white">{`Hi ${profile.name} and ${profile.catName}!`}</Text>
       </View>
-      <View className="px-4 pt-16">
+      <View className="space-y-6 px-4 pt-16">
         <View className="flex flex-col items-center gap-y-2 rounded-lg bg-[#F4EAE1] p-4 shadow-sm shadow-gray-500">
           <Image
             source={CAT_IMAGES[profile.furColor]}
             style={{
               width: 283,
               height: 120,
-              transform: [{ translateY: -12 }, { scaleX: -1 }],
+              transform: [{ translateY: -24 }, { scaleX: -1 }],
             }}
             className="absolute bottom-full"
           />
@@ -67,6 +67,22 @@ export default function HomePage({ navigation }: any) {
               navigation.push("Record");
             }}
             icon={<Icon name="microphone" color="white" size={36} />}
+          />
+        </View>
+        <View className="flex flex-col items-center gap-y-2 rounded-lg border border-dashed border-gray-300 bg-[#EFEFEF] p-4 shadow-gray-500">
+          <Text className="font-nunito-bold text-[24px]">
+            Upload Videos Coming Soon
+          </Text>
+          <Text className="mb-4 text-[16px]">
+            We're working on this for your quiet kitty!
+          </Text>
+          <Button
+            title="Coming Soon!"
+            onPress={() => {
+              navigation.push("Record");
+            }}
+            variant="disabled"
+            icon={<Icon name="upload" color="#8B8A95" size={36} />}
           />
         </View>
       </View>
