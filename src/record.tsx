@@ -20,14 +20,16 @@ export default function RecordPage({ navigation, route }: any) {
   const [numPaws, setNumPaws] = useState(0);
   const [translation, setTranslation] = useState("");
 
-  const paws = [...Array(numPaws)].map((_, i) => {
+  const paws = [
+    ...Array(status === Status.Translating && translation ? PAWS_NUM : numPaws),
+  ].map((_, i) => {
     const { x, y } = getPawCoordinates(i, width);
     return { x, y };
   });
 
   useEffect(() => {
     let interval: any;
-    if (status === Status.Translating) {
+    if (status === Status.Translating && !translation) {
       interval = setInterval(() => {
         setNumPaws((prevNumPaws) => {
           if (prevNumPaws === PAWS_NUM) {
@@ -47,13 +49,17 @@ export default function RecordPage({ navigation, route }: any) {
   // }, [route.name]);
 
   useEffect(() => {
-    if (status === Status.Translating && translation) {
-      // navigation.replace("Translation", {
-      //   // translation:
-      //   //   "Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some!",
-      //   translation: translation,
-      // });
-    }
+    const run = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 800));
+      if (status === Status.Translating && translation) {
+        navigation.replace("Translation", {
+          // translation:
+          //   "Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some!",
+          translation: translation,
+        });
+      }
+    };
+    run();
   }, [status, translation]);
 
   const translate = async () => {
@@ -120,7 +126,7 @@ export default function RecordPage({ navigation, route }: any) {
             </Text>
           </View>
           <View
-            className="relative w-full"
+            className="relative flex w-full items-center justify-center"
             style={{
               height: width * PAWS_CIRCLE_WIDTH,
             }}
@@ -153,6 +159,9 @@ export default function RecordPage({ navigation, route }: any) {
               //   {i}
               // </Text>
             ))}
+            {status === Status.Translating && translation && (
+              <Icon name="check" color="white" size={76} />
+            )}
           </View>
         </View>
       );
