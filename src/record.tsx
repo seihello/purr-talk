@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, View } from "react-native";
+import { Dimensions, Image, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Button from "./components/ui/button";
 import Text from "./components/ui/text";
@@ -81,11 +81,25 @@ export default function RecordPage({ navigation, route }: any) {
   switch (status) {
     case Status.Recording:
       return (
-        <View className="flex h-screen flex-col items-center gap-y-2 bg-primary-900 px-2 pt-16">
-          <Icon name="microphone" color="#F1AD5A" size={32} />
+        <View className="flex h-full flex-1 flex-col items-center gap-y-2 bg-primary-900 px-6 pb-8 pt-16">
+          <Icon name="microphone" color="#F1AD5A" size={48} />
           <Text className="font-nunito-bold text-[28px] text-white">
             Recording your cat...
           </Text>
+          <View className="flex flex-1 flex-col justify-center">
+            <Image
+              source={require(`../assets/img/two_tone_wave.png`)}
+              style={{
+                width: width,
+                height: (width * 111) / 393,
+              }}
+            />
+          </View>
+          <View className="mb-24">
+            <Text className="font-nunito-bold text-[24px] text-white">
+              00.20.30
+            </Text>
+          </View>
           <Button
             title="Stop recording"
             onPress={() => {

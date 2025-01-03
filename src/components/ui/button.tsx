@@ -27,7 +27,7 @@ export default function Button({
         variant === "default"
           ? "bg-primary-900"
           : variant === "outline"
-            ? "white"
+            ? "bg-white"
             : "bg-[#E8E8E8]"
       } ${disabled && variant !== "upcoming" ? "opacity-50" : ""}`.concat(
         className || "",
