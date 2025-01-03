@@ -83,7 +83,7 @@ export default function ProfileInputPage({ navigation }: any) {
               e.stopPropagation();
               setIsTermsOpen(false);
             }}
-            className="absolute z-50 z-50 bg-white"
+            className="absolute z-50 bg-white"
             style={{
               right: width * 0.05 + 16,
               top: height * 0.1 + 16,
