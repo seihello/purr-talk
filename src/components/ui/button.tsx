@@ -6,7 +6,7 @@ type Props = {
   title: string;
   onPress: () => void;
   className?: string;
-  variant?: "default" | "outline" | "disabled";
+  variant?: "default" | "outline" | "upcoming";
   disabled?: boolean;
   icon?: React.ReactNode;
 };
@@ -29,7 +29,9 @@ export default function Button({
           : variant === "outline"
             ? "white"
             : "bg-[#E8E8E8]"
-      } ${disabled ? "opacity-50" : ""}`.concat(className || "")}
+      } ${disabled && variant !== "upcoming" ? "opacity-50" : ""}`.concat(
+        className || "",
+      )}
       activeOpacity={0.8}
       disabled={disabled}
       {...rest}

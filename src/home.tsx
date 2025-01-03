@@ -78,10 +78,9 @@ export default function HomePage({ navigation }: any) {
           </Text>
           <Button
             title="Coming Soon!"
-            onPress={() => {
-              navigation.push("Record");
-            }}
-            variant="disabled"
+            onPress={() => {}}
+            disabled={true}
+            variant="upcoming"
             icon={<Icon name="upload" color="#8B8A95" size={36} />}
           />
         </View>
