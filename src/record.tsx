@@ -22,12 +22,17 @@ export default function RecordPage({ navigation, route }: any) {
   const [numPaws, setNumPaws] = useState(0);
   const [translation, setTranslation] = useState("");
 
-  const paws = [
-    ...Array(status === Status.Translating && translation ? PAWS_NUM : numPaws),
-  ].map((_, i) => {
-    const { x, y } = getPawCoordinates(i, width);
-    return { x, y };
-  });
+  const [elapsedTime, setElapsedTime] = useState(0);
+
+  useEffect(() => {
+    let interval: any;
+    if (status === Status.Recording) {
+      interval = setInterval(() => {
+        setElapsedTime((prevElapsedTime) => prevElapsedTime + 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [status]);
 
   useEffect(() => {
     let interval: any;
@@ -88,6 +93,16 @@ export default function RecordPage({ navigation, route }: any) {
     setTranslation(data);
   };
 
+  const paws = [
+    ...Array(status === Status.Translating && translation ? PAWS_NUM : numPaws),
+  ].map((_, i) => {
+    const { x, y } = getPawCoordinates(i, width);
+    return { x, y };
+  });
+
+  const minutes = Math.floor(elapsedTime / 60);
+  const seconds = elapsedTime % 60;
+
   switch (status) {
     case Status.Recording:
       return (
@@ -107,7 +122,9 @@ export default function RecordPage({ navigation, route }: any) {
           </View>
           <View className="mb-24">
             <Text className="font-nunito-bold text-[24px] text-white">
-              00.20.30
+              {`${minutes < 10 ? "0" : ""}${minutes}:${
+                seconds < 10 ? "0" : ""
+              }${seconds}`}
             </Text>
           </View>
           <Button
