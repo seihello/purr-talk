@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Dimensions, TextInput, View } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import PrivacyPolicy from "./components/profile-input/privacy-policy";
 import TermsAndConditions from "./components/profile-input/terms-and-conditions";
 import Button from "./components/ui/button";
 import Text from "./components/ui/text";
@@ -17,6 +18,7 @@ export default function ProfileInputPage({ navigation }: any) {
   const [furColor, setFurColor] = useState<FurColor>();
   const [isChecked, setIsChecked] = useState(false);
   const [isTermsOpen, setIsTermsOpen] = useState(false);
+  const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
 
   console.log("FurColor", furColor);
 
@@ -93,6 +95,25 @@ export default function ProfileInputPage({ navigation }: any) {
         </>
       )}
 
+      {isPrivacyPolicyOpen && (
+        <>
+          <View
+            onTouchEnd={(e: any) => {
+              e.stopPropagation();
+              setIsPrivacyPolicyOpen(false);
+            }}
+            className="absolute z-50 z-50 bg-white"
+            style={{
+              right: width * 0.05 + 16,
+              top: height * 0.1 + 16,
+            }}
+          >
+            <Icon name="close-box" color="#4651D1" size={32} />
+          </View>
+          <PrivacyPolicy />
+        </>
+      )}
+
       <View className="mb-4 flex flex-row items-center justify-between gap-x-4">
         <Checkbox
           value={isChecked}
@@ -106,11 +127,23 @@ export default function ProfileInputPage({ navigation }: any) {
             onTouchEnd={(e: any) => {
               e.stopPropagation();
               setIsTermsOpen(true);
+              setIsPrivacyPolicyOpen(false);
             }}
           >
             Terms and Conditions{" "}
           </Text>
-          and Privacy Policy.
+          and{" "}
+          <Text
+            className="text-primary-900 underline"
+            onTouchEnd={(e: any) => {
+              e.stopPropagation();
+              setIsPrivacyPolicyOpen(true);
+              setIsTermsOpen(false);
+            }}
+          >
+            Privacy Policy
+          </Text>
+          .
         </Text>
       </View>
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Dimensions, ScrollView, Text, View } from "react-native";
 
-export default function TermsAndConditions() {
+export default function PrivacyPolicy() {
   const { width, height } = Dimensions.get("window");
 
   return (
@@ -32,8 +32,7 @@ export default function TermsAndConditions() {
         }}
       >
         <View>
-          <Text>Terms and conditions</Text>
-          {/* TODO: Replace with actual terms and conditions */}
+          <Text>Privacy Policy</Text>
           <Text>Last updated: December 08, 2024</Text>
           <Text>
             This Privacy Policy describes Our policies and procedures on the
