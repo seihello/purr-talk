@@ -8,7 +8,8 @@ enum Status {
   Translating,
 }
 
-const PAWS_NUM = 14;
+const PAWS_NUM = 13;
+const PAWS_CIRCLE_WIDTH = 0.5;
 
 export default function RecordPage({ navigation, route }: any) {
   const [status, setStatus] = useState(Status.Recording);
@@ -34,7 +35,7 @@ export default function RecordPage({ navigation, route }: any) {
           }
           return prevNumPaws + 1;
         });
-      }, 200);
+      }, 100);
     }
     return () => clearInterval(interval);
   }, [status]);
@@ -47,11 +48,11 @@ export default function RecordPage({ navigation, route }: any) {
 
   useEffect(() => {
     if (status === Status.Translating && translation) {
-      navigation.replace("Translation", {
-        // translation:
-        //   "Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some!",
-        translation: translation,
-      });
+      // navigation.replace("Translation", {
+      //   // translation:
+      //   //   "Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some!",
+      //   translation: translation,
+      // });
     }
   }, [status, translation]);
 
@@ -112,14 +113,16 @@ export default function RecordPage({ navigation, route }: any) {
 
     case Status.Translating:
       return (
-        <View className="flex h-screen w-full flex-col items-center gap-y-16 bg-primary-900 pt-16">
-          <Text className="text-center font-nunito-bold text-[28px] text-white">
-            Turning meows into human words...
-          </Text>
+        <View className="flex h-screen w-full flex-col items-center gap-y-16 bg-primary-900 pt-[120px]">
+          <View className="mb-4 px-12">
+            <Text className="text-center font-nunito-bold text-[28px] text-white">
+              Turning meows into human words...
+            </Text>
+          </View>
           <View
             className="relative w-full"
             style={{
-              height: width * 0.7,
+              height: width * PAWS_CIRCLE_WIDTH,
             }}
           >
             {paws.map((paw, i) => (
@@ -165,7 +168,7 @@ function getPawCoordinates(
   }
 
   // const diameter = Math.min(screenWidth * 0.8, 400);
-  const diameter = screenWidth * 0.7;
+  const diameter = screenWidth * PAWS_CIRCLE_WIDTH;
 
   // Calculate radius and center coordinates of the circle
   const radius = diameter / 2;
