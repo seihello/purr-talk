@@ -51,7 +51,7 @@ export default function HomePage({ navigation }: any) {
             }}
             className="absolute bottom-full"
           />
-          <Icon name="microphone" color="#4651D1" size={32} />
+          <Icon name="microphone" color="#4651D1" size={36} />
           <Text className="font-nunito-bold text-[24px]">Record your cat</Text>
           <Text className="text-[16px]">for your chatty cat</Text>
           <Image
@@ -66,6 +66,7 @@ export default function HomePage({ navigation }: any) {
             onPress={() => {
               navigation.push("Record");
             }}
+            icon={<Icon name="microphone" color="white" size={36} />}
           />
         </View>
       </View>
