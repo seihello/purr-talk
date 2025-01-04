@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, View } from "react-native";
+import { Image, ScrollView, View } from "react-native";
 import Button from "./components/ui/button";
 import Text from "./components/ui/text";
 import useProfile from "./hooks/use-profile";
@@ -17,8 +17,8 @@ export default function TranslationPage({ navigation, route }: any) {
   if (!profile) return;
 
   return (
-    <View className="flex h-full w-full flex-col items-center justify-between bg-primary-300 px-4 py-16">
-      <View className="flex flex-col items-center gap-y-1">
+    <View className="flex h-full w-full flex-col items-center justify-between bg-primary-300 px-4 pb-8">
+      <View className="flex grow flex-col items-center justify-center gap-y-1 pb-2">
         <Text className="text-center font-nunito-bold text-[32px]">
           Purrfect!
         </Text>
@@ -26,12 +26,19 @@ export default function TranslationPage({ navigation, route }: any) {
           Your translation is complete
         </Text>
       </View>
-      <View className="flex w-full flex-col rounded-xl bg-white py-6">
-        <View className="px-6">
+      <View className="flex w-full shrink grow-0 flex-col rounded-xl bg-white px-6 py-6">
+        <ScrollView
+          alwaysBounceHorizontal={false}
+          alwaysBounceVertical={false}
+          bounces={true}
+        >
           <Text className="font-nunito-semibold text-[24px] text-primary-900">
-            {route.params.translation}
+            {/* {route.params.translation} */}
+            You’re warm, and you smell familiar. I’ll curl up here and purr for
+            you… just don’t move. You’re warm, and you smell familiar. I’ll curl
+            up here and purr for you… just don’t move.
           </Text>
-        </View>
+        </ScrollView>
         <View className="my-6 h-[1px] w-full bg-gray-100" />
         <View className="flex w-full flex-row justify-center">
           <Image
@@ -43,13 +50,16 @@ export default function TranslationPage({ navigation, route }: any) {
           />
         </View>
       </View>
-      <Image
-        source={CAT_IMAGES[profile.furColor]}
-        style={{
-          width: 283,
-          height: 120,
-        }}
-      />
+      <View className="flex grow items-center justify-center">
+        <Image
+          source={CAT_IMAGES[profile.furColor]}
+          style={{
+            width: 283,
+            height: 120,
+          }}
+        />
+      </View>
+
       <Button
         title="Re-record"
         onPress={() => {
