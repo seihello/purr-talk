@@ -33,10 +33,10 @@ export default function TranslationPage({ navigation, route }: any) {
           bounces={true}
         >
           <Text className="font-nunito-semibold text-[24px] text-primary-900">
-            {/* {route.params.translation} */}
-            You’re warm, and you smell familiar. I’ll curl up here and purr for
+            {route.params.translation}
+            {/* You’re warm, and you smell familiar. I’ll curl up here and purr for
             you… just don’t move. You’re warm, and you smell familiar. I’ll curl
-            up here and purr for you… just don’t move.
+            up here and purr for you… just don’t move. */}
           </Text>
         </ScrollView>
         <View className="my-6 h-[1px] w-full bg-gray-100" />

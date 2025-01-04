@@ -73,7 +73,7 @@ export default function RecordPage({ navigation, route }: any) {
     setStatus(Status.Translating);
 
     // TODO: Call API to translate the voice
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const response = await fetch(
       "https://purr-talk-server.vercel.app/api/translate",
