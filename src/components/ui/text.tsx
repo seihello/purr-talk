@@ -6,6 +6,7 @@ export default function Text(props: any) {
   return (
     <ReactNativeText
       className={"font-nunito text-[#101720]"}
+      allowFontScaling={false}
       {...rest}
     ></ReactNativeText>
   );
