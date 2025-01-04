@@ -11,16 +11,28 @@
       "resizeMode": "contain",
       "backgroundColor": "#535FC1"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.purrtalk"
+      "bundleIdentifier": "com.purrtalk",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "This app requires to access your microphone to record your cat's voice."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ],
+      "package": "com.purrtalk"
     },
     "web": {
       "favicon": "./assets/icon.png"
@@ -30,6 +42,14 @@
         "projectId": "73a53d4a-7c44-4818-9730-2a22c0b5beba"
       }
     },
-    "owner": "seihello"
+    "owner": "seihello",
+    "plugins": [
+      [
+        "expo-av",
+        {
+          "microphonePermission": "This app requires to access your microphone to record your cat's voice."
+        }
+      ]
+    ]
   }
 }

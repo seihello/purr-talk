@@ -3014,6 +3014,11 @@ expo-asset@~11.0.1:
     invariant "^2.2.4"
     md5-file "^3.2.3"
 
+expo-av@~15.0.1:
+  version "15.0.1"
+  resolved "https://registry.yarnpkg.com/expo-av/-/expo-av-15.0.1.tgz#c337f831c2e29174de7117c37d2f92c1275bb4c4"
+  integrity sha512-2d4j7RTH9Y5nI1FoC0woRjqnj5G8sF0al2iW6kG21PPs/CgS4QARbHxMrPxKpUXrC6iu+6EMj2h5H6T0nqteFg==
+
 expo-checkbox@~4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/expo-checkbox/-/expo-checkbox-4.0.0.tgz#beceea701896d67e68b8383b3d54135b1a89e074"

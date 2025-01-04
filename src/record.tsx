@@ -1,9 +1,11 @@
+import { Audio } from "expo-av";
 import React, { useEffect, useState } from "react";
 import { Dimensions, Image, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Button from "./components/ui/button";
 import Text from "./components/ui/text";
 import useProfile from "./hooks/use-profile";
+
 enum Status {
   Recording,
   Translating,
@@ -19,20 +21,57 @@ export default function RecordPage({ navigation, route }: any) {
   const { profile } = useProfile();
   const [status, setStatus] = useState(Status.Recording);
 
+  const [recording, setRecording] = useState<Audio.Recording>();
+  const [isRecording, setIsRecording] = useState(false);
+  const [permissionResponse, requestPermission] = Audio.usePermissions();
+
   const [numPaws, setNumPaws] = useState(0);
   const [translation, setTranslation] = useState("");
 
   const [elapsedTime, setElapsedTime] = useState(0);
 
   useEffect(() => {
+    const record = async () => {
+      if (!permissionResponse) return;
+      if (permissionResponse.status !== "granted") {
+        if (permissionResponse.canAskAgain) {
+          console.log("Requesting permission..");
+          const newPermissionResponse = await requestPermission();
+          if (newPermissionResponse.status !== "granted") {
+            return;
+          }
+        } else {
+          return;
+        }
+      }
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: true,
+        playsInSilentModeIOS: true,
+      });
+
+      console.log("Starting to record");
+      setIsRecording(true);
+      const { recording } = await Audio.Recording.createAsync(
+        Audio.RecordingOptionsPresets.HIGH_QUALITY,
+      );
+      console.log("Started recording");
+      setRecording(recording);
+    };
+    record();
+  }, [permissionResponse, permissionResponse?.status]);
+
+  useEffect(() => {
     let interval: any;
-    if (status === Status.Recording) {
+    console.log("isRecording", isRecording);
+    console.log("status", status);
+
+    if (status === Status.Recording && isRecording) {
       interval = setInterval(() => {
         setElapsedTime((prevElapsedTime) => prevElapsedTime + 1);
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [status]);
+  }, [status, isRecording]);
 
   useEffect(() => {
     let interval: any;
@@ -69,8 +108,15 @@ export default function RecordPage({ navigation, route }: any) {
     run();
   }, [status, translation]);
 
-  const translate = async () => {
+  const onStopRecording = async () => {
+    console.log("Stop recording");
+    if (!recording) return;
+
     setStatus(Status.Translating);
+
+    await recording.stopAndUnloadAsync();
+    const uri = recording.getURI();
+    console.log("Stored at", uri);
 
     // TODO: Call API to translate the voice
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -103,37 +149,51 @@ export default function RecordPage({ navigation, route }: any) {
   const minutes = Math.floor(elapsedTime / 60);
   const seconds = elapsedTime % 60;
 
+  if (!permissionResponse) return;
+
   switch (status) {
     case Status.Recording:
       return (
         <View className="flex h-full flex-1 flex-col items-center gap-y-2 bg-primary-900 px-6 pb-8 pt-16">
           <Icon name="microphone" color="#F1AD5A" size={48} />
-          <Text className="font-nunito-bold text-[28px] text-white">
-            Recording your cat...
-          </Text>
-          <View className="flex flex-1 flex-col justify-center">
-            <Image
-              source={require(`../assets/img/white_pink_wave.png`)}
-              style={{
-                width: width,
-                height: (width * 111) / 393,
-              }}
-            />
-          </View>
-          <View className="mb-24">
-            <Text className="font-nunito-bold text-[24px] text-white">
-              {`${minutes < 10 ? "0" : ""}${minutes}:${
-                seconds < 10 ? "0" : ""
-              }${seconds}`}
+          {permissionResponse.status === "granted" ? (
+            <Text className="font-nunito-bold text-[28px] text-white">
+              Recording your cat...
             </Text>
-          </View>
-          <Button
-            title="Stop recording"
-            onPress={() => {
-              translate();
-            }}
-            variant="outline"
-          />
+          ) : (
+            <Text className="text-center font-nunito-semibold text-[16px] text-white">
+              Please enable microphone access for our app in your device's
+              settings.
+            </Text>
+          )}
+
+          {permissionResponse.status === "granted" && (
+            <>
+              <View className="flex flex-1 flex-col justify-center">
+                <Image
+                  source={require(`../assets/img/white_pink_wave.png`)}
+                  style={{
+                    width: width,
+                    height: (width * 111) / 393,
+                  }}
+                />
+              </View>
+              <View className="mb-24">
+                <Text className="font-nunito-bold text-[24px] text-white">
+                  {`${minutes < 10 ? "0" : ""}${minutes}:${
+                    seconds < 10 ? "0" : ""
+                  }${seconds}`}
+                </Text>
+              </View>
+              <Button
+                title="Stop recording"
+                onPress={() => {
+                  onStopRecording();
+                }}
+                variant="outline"
+              />
+            </>
+          )}
         </View>
       );
 
