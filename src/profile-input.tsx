@@ -15,7 +15,7 @@ export default function ProfileInputPage({ navigation }: any) {
 
   const [name, setName] = useState<string>("");
   const [catName, setCatName] = useState<string>("");
-  const [furColor, setFurColor] = useState<FurColor>();
+  const [furColor, setFurColor] = useState<FurColor>(FurColor.Tuxedo);
   const [isChecked, setIsChecked] = useState(false);
   const [isTermsOpen, setIsTermsOpen] = useState(false);
   const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
@@ -53,6 +53,7 @@ export default function ProfileInputPage({ navigation }: any) {
         />
         <Text className="mb-1 mt-6">Fur Color</Text>
         <RNPickerSelect
+          value={furColor}
           onValueChange={(value) =>
             setFurColor(FurColor[value as keyof typeof FurColor])
           }

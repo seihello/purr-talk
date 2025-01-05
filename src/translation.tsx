@@ -1,5 +1,8 @@
-import React from "react";
+import { Audio } from "expo-av";
+import { Sound } from "expo-av/build/Audio";
+import React, { useState } from "react";
 import { Image, ScrollView, View } from "react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Button from "./components/ui/button";
 import Text from "./components/ui/text";
 import useProfile from "./hooks/use-profile";
@@ -14,6 +17,18 @@ enum Status {
 export default function TranslationPage({ navigation, route }: any) {
   const { profile } = useProfile();
 
+  const [sound, setSound] = useState<Audio.Sound>(new Sound());
+  // await AudioPlayer.current.loadAsync({ uri: RecordedURI }, {}, true);
+
+  async function onPlayCatVoice() {
+    console.log("Loading Sound", route.params.voiceUrl);
+    // const { sound } = await Audio.Sound.createAsync(route.params.voiceUrl);
+    await sound.loadAsync({ uri: route.params.voiceUrl }, {}, true);
+    // setSound(sound);
+
+    console.log("Playing Sound");
+    await sound.playAsync();
+  }
   if (!profile) return;
 
   return (
@@ -47,6 +62,13 @@ export default function TranslationPage({ navigation, route }: any) {
               width: 236,
               height: 43,
             }}
+          />
+          <Button
+            title="P"
+            onPress={() => {
+              onPlayCatVoice();
+            }}
+            icon={<Icon name="microphone" color="white" size={36} />}
           />
         </View>
       </View>

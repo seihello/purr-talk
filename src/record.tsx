@@ -1,5 +1,5 @@
 import { Audio } from "expo-av";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Dimensions, Image, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Button from "./components/ui/button";
@@ -25,6 +25,8 @@ export default function RecordPage({ navigation, route }: any) {
   const [isRecording, setIsRecording] = useState(false);
   const [permissionResponse, requestPermission] = Audio.usePermissions();
 
+  const voiceUrl = useRef<string>("");
+
   const [numPaws, setNumPaws] = useState(0);
   const [translation, setTranslation] = useState("");
 
@@ -34,13 +36,9 @@ export default function RecordPage({ navigation, route }: any) {
     const record = async () => {
       if (!permissionResponse) return;
       if (permissionResponse.status !== "granted") {
-        if (permissionResponse.canAskAgain) {
-          console.log("Requesting permission..");
-          const newPermissionResponse = await requestPermission();
-          if (newPermissionResponse.status !== "granted") {
-            return;
-          }
-        } else {
+        console.log("Requesting permission..");
+        const newPermissionResponse = await requestPermission();
+        if (newPermissionResponse.status !== "granted") {
           return;
         }
       }
@@ -62,8 +60,6 @@ export default function RecordPage({ navigation, route }: any) {
 
   useEffect(() => {
     let interval: any;
-    console.log("isRecording", isRecording);
-    console.log("status", status);
 
     if (status === Status.Recording && isRecording) {
       interval = setInterval(() => {
@@ -101,6 +97,7 @@ export default function RecordPage({ navigation, route }: any) {
         navigation.replace("Translation", {
           // translation:
           //   "Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some!",
+          voiceUrl: voiceUrl.current || "",
           translation: translation,
         });
       }
@@ -116,6 +113,10 @@ export default function RecordPage({ navigation, route }: any) {
 
     await recording.stopAndUnloadAsync();
     const uri = recording.getURI();
+    // const hoge = await recording.createNewLoadedSoundAsync();
+    // hoge.sound.playAsync();
+    if (uri) voiceUrl.current = uri;
+
     console.log("Stored at", uri);
 
     // TODO: Call API to translate the voice
