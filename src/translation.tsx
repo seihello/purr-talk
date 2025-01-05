@@ -41,7 +41,7 @@ export default function TranslationPage({ navigation, route }: any) {
           Your translation is complete
         </Text>
       </View>
-      <View className="flex w-full shrink grow-0 flex-col rounded-xl bg-white px-6 py-6">
+      <View className="relative flex w-full shrink grow-0 flex-col rounded-xl bg-white px-6 py-6">
         <ScrollView
           alwaysBounceHorizontal={false}
           alwaysBounceVertical={false}
@@ -72,6 +72,14 @@ export default function TranslationPage({ navigation, route }: any) {
           >
             <Icon name="play-outline" color="white" size={36} />
           </TouchableOpacity>
+        </View>
+        <View
+          className="absolute bottom-0 left-16"
+          style={{
+            transform: [{ translateY: 30 }, { scaleY: -1 }],
+          }}
+        >
+          <Icon name="triangle" color="white" size={36} />
         </View>
       </View>
       <View className="flex grow items-center justify-center">
