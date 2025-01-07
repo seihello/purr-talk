@@ -9,6 +9,7 @@ import InitPage from "./src/init";
 import IntroductionPage from "./src/introduction";
 import ProfileInputPage from "./src/profile-input";
 import ProfileReadyPage from "./src/profile-ready";
+import ProfileSettingPage from "./src/profile-setting";
 import RecordPage from "./src/record";
 import TranslationPage from "./src/translation";
 
@@ -86,6 +87,21 @@ export default function App() {
         <Stack.Screen
           name="Translation"
           component={TranslationPage}
+          options={{
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: "#E8E7F7",
+            },
+            headerTintColor: "#4651D1",
+            headerTitleStyle: {
+              color: "black",
+              fontFamily: "NunitoSemiBold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Your Profile"
+          component={ProfileSettingPage}
           options={{
             headerShadowVisible: false,
             headerStyle: {
