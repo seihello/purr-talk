@@ -25,8 +25,8 @@ export default function HomePage({ navigation }: any) {
       alwaysBounceVertical={false}
       bounces={true}
     >
-      <View className="z-20 flex min-h-screen w-full flex-col  pb-16">
-        <View className="relative flex flex-row bg-primary-900 px-8 pb-16 pt-24">
+      <View className="z-20 flex min-h-screen w-full flex-col pb-16">
+        <View className="relative flex w-full flex-row items-center justify-between bg-primary-900 px-8 pb-16 pt-24">
           <View className="flex flex-col">
             <Image
               source={require(`../assets/img/purr_talk_white.png`)}
@@ -35,13 +35,13 @@ export default function HomePage({ navigation }: any) {
                 height: 24,
               }}
             />
-            <Text className="mt-2 font-nunito-semibold text-[22px] text-white">{`Hi ${profile.name} and ${profile.catName}!`}</Text>
+            <Text className="mt-2 font-nunito-semibold text-[20px] text-[#F6F6F6]">{`Hi ${profile.name} and ${profile.catName}!`}</Text>
           </View>
           <TouchableOpacity
             onPress={() => {
               navigation.push("Your Profile");
             }}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F6F6F6]"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F6F6F6]/80"
             activeOpacity={0.8}
           >
             <Icon name="cog-outline" color="#4651D1" size={24} />
