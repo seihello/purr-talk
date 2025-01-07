@@ -20,7 +20,7 @@ export default function ProfileSettingPage({ navigation }: any) {
   const onSave = async () => {
     if (name && catName && furColor) {
       await updateProfile(name, catName, furColor);
-      navigation.push("Home");
+      navigation.replace("Home");
     }
   };
 
