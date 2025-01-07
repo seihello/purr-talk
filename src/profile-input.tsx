@@ -20,8 +20,6 @@ export default function ProfileInputPage({ navigation }: any) {
   const [isTermsOpen, setIsTermsOpen] = useState(false);
   const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
 
-  console.log("FurColor", furColor);
-
   const onPress = async () => {
     if (name && catName && furColor) {
       await updateProfile(name, catName, furColor);
@@ -53,12 +51,10 @@ export default function ProfileInputPage({ navigation }: any) {
         />
         <Text className="mb-1 mt-6">Fur Color</Text>
         <RNPickerSelect
-          value={FurColor[furColor as keyof typeof FurColor]}
-          onValueChange={(value) =>
-            setFurColor(FurColor[value as keyof typeof FurColor])
-          }
-          items={Object.keys(FurColor).map((color, index) => ({
-            label: String(FurColor[color as keyof typeof FurColor]),
+          value={furColor}
+          onValueChange={(value) => setFurColor(furColor)}
+          items={Object.values(FurColor).map((color, index) => ({
+            label: color,
             value: color,
             key: index,
           }))}

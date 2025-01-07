@@ -26,6 +26,7 @@ export default function ProfileSettingPage({ navigation }: any) {
 
   useEffect(() => {
     if (profile && !name && !catName && !furColor) {
+      console.log("saved value", profile.furColor);
       setName(profile.name);
       setCatName(profile.catName);
       setFurColor(profile.furColor);
@@ -55,12 +56,12 @@ export default function ProfileSettingPage({ navigation }: any) {
         />
         <Text className="mb-1 mt-6">Fur Color</Text>
         <RNPickerSelect
-          value={FurColor[furColor as keyof typeof FurColor]}
+          value={furColor}
           onValueChange={(value) => {
-            setFurColor(FurColor[value as keyof typeof FurColor]);
+            setFurColor(value);
           }}
-          items={Object.keys(FurColor).map((color, index) => ({
-            label: String(FurColor[color as keyof typeof FurColor]),
+          items={Object.values(FurColor).map((color, index) => ({
+            label: color,
             value: color,
             key: index,
           }))}
