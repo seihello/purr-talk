@@ -53,7 +53,7 @@ export default function ProfileInputPage({ navigation }: any) {
         />
         <Text className="mb-1 mt-6">Fur Color</Text>
         <RNPickerSelect
-          value={furColor}
+          value={FurColor[furColor as keyof typeof FurColor]}
           onValueChange={(value) =>
             setFurColor(FurColor[value as keyof typeof FurColor])
           }
