@@ -83,7 +83,7 @@ export default function ProfileSettingPage({ navigation }: any) {
       </View>
       <View className="flex w-full grow items-center justify-center">
         <Image
-          source={CAT_IMAGES[profile.furColor]}
+          source={CAT_IMAGES[furColor ?? profile.furColor]}
           style={{
             width: 283,
             height: 120,
