@@ -20,7 +20,7 @@ export default function HomePage({ navigation }: any) {
       bounces={true}
     >
       <View className="z-20 flex min-h-screen w-full flex-col  pb-16">
-        <View className="flex flex-col bg-primary-900 px-8 pb-16 pt-24">
+        <View className="relative flex flex-col bg-primary-900 px-8 pb-16 pt-24">
           <Image
             source={require(`../assets/img/purr_talk_white.png`)}
             style={{
@@ -29,6 +29,17 @@ export default function HomePage({ navigation }: any) {
             }}
           />
           <Text className="mt-2 font-nunito-semibold text-[22px] text-white">{`Hi ${profile.name} and ${profile.catName}!`}</Text>
+          <View
+            className="absolute bottom-0 rounded-full bg-white"
+            style={{
+              width: width * 3.2,
+              height: width * 3.2,
+              transform: [
+                { translateX: -width * 1.6 + width * 0.5 },
+                { translateY: 1210 },
+              ],
+            }}
+          />
         </View>
         <View className="grow space-y-6 bg-white px-4 pt-16">
           <View className="flex flex-col items-center gap-y-2 rounded-lg bg-[#F4EAE1] p-4 shadow-sm shadow-gray-500">
