@@ -1,4 +1,6 @@
+import axios from "axios";
 import { Audio } from "expo-av";
+import FormData from "form-data";
 import React, { useEffect, useRef, useState } from "react";
 import { Dimensions, Image, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -84,19 +86,11 @@ export default function RecordPage({ navigation, route }: any) {
     return () => clearInterval(interval);
   }, [status]);
 
-  // useEffect(() => {
-  //   if (route.name !== "Record") {
-  //     setNumPaws(0);
-  //   }
-  // }, [route.name]);
-
   useEffect(() => {
     const run = async () => {
       await new Promise((resolve) => setTimeout(resolve, 800));
       if (status === Status.Translating && translation) {
         navigation.replace("Translation", {
-          // translation:
-          //   "Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some tuna! Meow! I’m hungry. Give me some!",
           voiceUrl: voiceUrl.current || "",
           translation: translation,
         });
@@ -106,38 +100,48 @@ export default function RecordPage({ navigation, route }: any) {
   }, [status, translation]);
 
   const onStopRecording = async () => {
-    console.log("Stop recording");
-    if (!recording) return;
+    try {
+      console.log("Stop recording");
+      if (!recording) return;
 
-    setStatus(Status.Translating);
+      setStatus(Status.Translating);
 
-    await recording.stopAndUnloadAsync();
-    const uri = recording.getURI();
-    // const hoge = await recording.createNewLoadedSoundAsync();
-    // hoge.sound.playAsync();
-    if (uri) voiceUrl.current = uri;
+      await recording.stopAndUnloadAsync();
+      const uri = recording.getURI();
+      console.log("Stored at", uri);
+      // const hoge = await recording.createNewLoadedSoundAsync();
+      // hoge.sound.playAsync();
+      if (uri) {
+        voiceUrl.current = uri;
 
-    console.log("Stored at", uri);
+        const formData = new FormData();
+        formData.append("file", {
+          uri: uri.replace("file://", ""),
+          name: "audio.m4a",
+          type: "audio/m4a",
+        });
 
-    // TODO: Call API to translate the voice
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+        // TODO: Call API to translate the voice
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    const response = await fetch(
-      "https://purr-talk-server.vercel.app/api/translate",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          humanName: profile?.name || "Human",
-          catName: profile?.catName || "Cat",
-        }),
-      },
-    );
-    const { data } = await response.json();
-    console.log("data", data);
-    setTranslation(data);
+        const response = await axios.post(
+          "https://purr-talk-server.vercel.app/api/translate",
+          // "http://localhost:3000/api/translate",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          },
+        );
+        console.log("data", response.data);
+
+        setTranslation(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      navigation.replace("Home");
+    }
   };
 
   const paws = [
@@ -228,17 +232,6 @@ export default function RecordPage({ navigation, route }: any) {
               >
                 <Icon name="paw" color="white" size={32} />
               </View>
-              // <Text
-              //   key={i}
-              //   className="absolute text-black"
-              //   style={{
-              //     left: paw.x,
-              //     top: paw.y,
-              //     transform: [{ translateX: -5 }, { translateY: -5 }],
-              //   }}
-              // >
-              //   {i}
-              // </Text>
             ))}
             {status === Status.Translating && translation && (
               <Icon name="check" color="white" size={76} />
