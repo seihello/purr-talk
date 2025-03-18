@@ -3,15 +3,14 @@ import { useFonts } from "expo-font";
 // import { View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomePage from "./src/home";
 import useProfile from "./src/hooks/use-profile";
-import InitPage from "./src/init";
-import IntroductionPage from "./src/introduction";
-import ProfileInputPage from "./src/profile-input";
-import ProfileReadyPage from "./src/profile-ready";
-import ProfileSettingPage from "./src/profile-setting";
-import RecordPage from "./src/record";
-import TranslationPage from "./src/translation";
+import HomePage from "./src/pages/home";
+import InitPage from "./src/pages/init";
+import IntroductionPage from "./src/pages/introduction";
+import ProfileInputPage from "./src/pages/profile-input";
+import ProfileReadyPage from "./src/pages/profile-ready";
+import ProfileSettingPage from "./src/pages/profile-setting";
+import RecordPage from "./src/pages/record";
 
 const Stack = createNativeStackNavigator();
 
@@ -80,21 +79,6 @@ export default function App() {
             headerTintColor: "white",
             headerTitleStyle: {
               color: "white",
-              fontFamily: "NunitoSemiBold",
-            },
-          }}
-        />
-        <Stack.Screen
-          name="Translation"
-          component={TranslationPage}
-          options={{
-            headerShadowVisible: false,
-            headerStyle: {
-              backgroundColor: "#E8E7F7",
-            },
-            headerTintColor: "#4651D1",
-            headerTitleStyle: {
-              color: "black",
               fontFamily: "NunitoSemiBold",
             },
           }}

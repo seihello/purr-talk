@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Dimensions, Image, TextInput, View } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
-import Button from "./components/ui/button";
-import Text from "./components/ui/text";
-import FurColor from "./enum/fur-color.enum";
-import useProfile from "./hooks/use-profile";
-import CAT_IMAGES from "./lib/cats/cat-images";
-import updateProfile from "./lib/progress/update-profile";
+import Button from "../components/ui/button";
+import Text from "../components/ui/text";
+import FurColor from "../enum/fur-color.enum";
+import useProfile from "../hooks/use-profile";
+import CAT_IMAGES from "../lib/cats/cat-images";
+import updateProfile from "../lib/progress/update-profile";
 
 export default function ProfileSettingPage({ navigation }: any) {
   const { width, height } = Dimensions.get("window");

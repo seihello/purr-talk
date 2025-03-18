@@ -1,7 +1,7 @@
 import React from "react";
 import { Dimensions, Image, View } from "react-native";
-import Button from "./components/ui/button";
-import Text from "./components/ui/text";
+import Button from "../components/ui/button";
+import Text from "../components/ui/text";
 
 const PURR_TALK_TEXT_IMAGE_WIDTH = 216;
 
@@ -12,7 +12,7 @@ export default function InitPage({ navigation }: any) {
     <View className="flex h-screen w-screen flex-col items-center pb-8 pt-12">
       <View className="flex shrink grow items-center justify-center">
         <Image
-          source={require(`../assets/img/woman_with_cat.png`)}
+          source={require(`../../assets/img/woman_with_cat.png`)}
           style={{
             width: width * 0.9,
             height: (width * 0.9 * 417) / 348,
@@ -28,7 +28,7 @@ export default function InitPage({ navigation }: any) {
             }}
           >
             <Image
-              source={require(`../assets/img/pink_wave1.png`)}
+              source={require(`../../assets/img/pink_wave1.png`)}
               style={{
                 width: width,
                 height: (width * 529) / 1572,
@@ -40,7 +40,7 @@ export default function InitPage({ navigation }: any) {
           </Text>
         </View>
         <Image
-          source={require(`../assets/img/purr_talk_primary.png`)}
+          source={require(`../../assets/img/purr_talk_primary.png`)}
           style={{
             width: 193,
             height: 35,

@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import { Dimensions, Image, TextInput, View } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import PrivacyPolicy from "./components/profile-input/privacy-policy";
-import TermsAndConditions from "./components/profile-input/terms-and-conditions";
-import Button from "./components/ui/button";
-import Text from "./components/ui/text";
-import FurColor from "./enum/fur-color.enum";
-import updateProfile from "./lib/progress/update-profile";
+import PrivacyPolicy from "../components/profile-input/privacy-policy";
+import TermsAndConditions from "../components/profile-input/terms-and-conditions";
+import Button from "../components/ui/button";
+import Text from "../components/ui/text";
+import FurColor from "../enum/fur-color.enum";
+import updateProfile from "../lib/progress/update-profile";
 
 export default function ProfileInputPage({ navigation }: any) {
   const { width, height } = Dimensions.get("window");
@@ -76,7 +76,7 @@ export default function ProfileInputPage({ navigation }: any) {
       </View>
       <View className="grow">
         <Image
-          source={require(`../assets/img/pink_wave2.png`)}
+          source={require(`../../assets/img/pink_wave2.png`)}
           style={{
             width: width,
             height: (width * 334) / 1572,

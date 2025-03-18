@@ -1,35 +1,37 @@
 import { Audio } from "expo-av";
 import { Sound } from "expo-av/build/Audio";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Image, ScrollView, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import Button from "./components/ui/button";
-import Text from "./components/ui/text";
-import useProfile from "./hooks/use-profile";
-import CAT_IMAGES from "./lib/cats/cat-images";
+import Button from "../components/ui/button";
+import Text from "../components/ui/text";
+import RecordStatus from "../enum/record-status.enum";
+import CAT_IMAGES from "../lib/cats/cat-images";
+import Profile from "../types/profile.type";
 
-enum Status {
-  Recording,
-  Translating,
-  Done,
-}
+type Props = {
+  profile: Profile;
+  setStatus: React.Dispatch<React.SetStateAction<RecordStatus>>;
+  translation: string;
+  voiceUrl: React.MutableRefObject<string>;
+};
 
-export default function TranslationPage({ navigation, route }: any) {
-  const { profile } = useProfile();
-
+export default function TranslatedView({
+  profile,
+  setStatus,
+  translation,
+  voiceUrl,
+}: Props) {
   const [sound, setSound] = useState<Audio.Sound>(new Sound());
-  // await AudioPlayer.current.loadAsync({ uri: RecordedURI }, {}, true);
 
   async function onPlayCatVoice() {
-    console.log("Loading Sound", route.params.voiceUrl);
     // const { sound } = await Audio.Sound.createAsync(route.params.voiceUrl);
-    await sound.loadAsync({ uri: route.params.voiceUrl }, {}, true);
+    await sound.loadAsync({ uri: voiceUrl.current }, {}, true);
     // setSound(sound);
 
     console.log("Playing Sound");
     await sound.playAsync();
   }
-  if (!profile) return;
 
   return (
     <View className="flex h-full w-full flex-col items-center justify-between bg-primary-300 px-4 pb-8">
@@ -48,16 +50,13 @@ export default function TranslationPage({ navigation, route }: any) {
           bounces={true}
         >
           <Text className="font-nunito-semibold text-[24px] text-primary-900">
-            {route.params.translation}
-            {/* You’re warm, and you smell familiar. I’ll curl up here and purr for
-            you… just don’t move. You’re warm, and you smell familiar. I’ll curl
-            up here and purr for you… just don’t move. */}
+            {translation}
           </Text>
         </ScrollView>
         <View className="my-6 h-[1px] w-full bg-gray-100" />
         <View className="flex w-full flex-row items-center justify-center gap-x-4">
           <Image
-            source={require(`../assets/img/blue_pink_wave.png`)}
+            source={require(`../../assets/img/blue_pink_wave.png`)}
             style={{
               width: 236,
               height: 43,
@@ -95,7 +94,7 @@ export default function TranslationPage({ navigation, route }: any) {
       <Button
         title="Re-record"
         onPress={() => {
-          navigation.replace("Record");
+          setStatus(RecordStatus.Recording);
         }}
         variant="outline"
       />

@@ -7,10 +7,10 @@ import {
   View,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import Button from "./components/ui/button";
-import Text from "./components/ui/text";
-import useProfile from "./hooks/use-profile";
-import CAT_IMAGES from "./lib/cats/cat-images";
+import Button from "../components/ui/button";
+import Text from "../components/ui/text";
+import useProfile from "../hooks/use-profile";
+import CAT_IMAGES from "../lib/cats/cat-images";
 
 export default function HomePage({ navigation }: any) {
   const { width } = Dimensions.get("window");
@@ -29,7 +29,7 @@ export default function HomePage({ navigation }: any) {
         <View className="relative flex w-full flex-row items-center justify-between bg-primary-900 px-8 pb-16 pt-24">
           <View className="flex flex-col">
             <Image
-              source={require(`../assets/img/purr_talk_white.png`)}
+              source={require(`../../assets/img/purr_talk_white.png`)}
               style={{
                 width: 130,
                 height: 24,
@@ -75,7 +75,7 @@ export default function HomePage({ navigation }: any) {
             </Text>
             <Text className="text-[16px]">for your chatty cat</Text>
             <Image
-              source={require(`../assets/img/orange_wave.png`)}
+              source={require(`../../assets/img/orange_wave.png`)}
               style={{
                 width: width - 16 * 2,
                 height: (width * 71) / 364,

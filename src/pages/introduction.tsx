@@ -1,8 +1,8 @@
 import React from "react";
 import { Dimensions, Image, ScrollView, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import Button from "./components/ui/button";
-import Text from "./components/ui/text";
+import Button from "../components/ui/button";
+import Text from "../components/ui/text";
 
 export default function IntroductionPage({ navigation }: any) {
   const { width, height } = Dimensions.get("window");
@@ -17,7 +17,7 @@ export default function IntroductionPage({ navigation }: any) {
       <View className="flex min-h-screen flex-col items-center px-4 pb-8 pt-12">
         <View className="flex grow items-center justify-end">
           <Image
-            source={require(`../assets/img/chatting_cats.png`)}
+            source={require(`../../assets/img/chatting_cats.png`)}
             style={{
               width: width * 0.9,
               height: (width * 0.9 * 309) / 360,
@@ -44,7 +44,7 @@ export default function IntroductionPage({ navigation }: any) {
             </Text>
           </View>
 
-          <View className="bg-primary-500 mb-2 flex w-full flex-col gap-y-4 rounded-xl border border-gray-300 px-6 pb-6 pt-2">
+          <View className="mb-2 flex w-full flex-col gap-y-4 rounded-xl border border-gray-300 bg-primary-500 px-6 pb-6 pt-2">
             <View className="flex flex-row items-center gap-x-2">
               <Icon name="upload" color="#4651D1" size={36} />
               <Text className="font-nunito-bold text-[24px]">Upload</Text>
