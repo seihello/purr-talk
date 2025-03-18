@@ -43,8 +43,8 @@ export default function TranslatingView({
           await new Promise((resolve) => setTimeout(resolve, 1000));
 
           const response = await axios.post(
-            // "https://purr-talk-server.vercel.app/api/translate",
-            "http://localhost:3000/api/translate",
+            "https://purr-talk-server.vercel.app/api/translate",
+            // "http://localhost:3000/api/translate",
             // formData,
             {
               headers: {

@@ -37,8 +37,8 @@ export default function ProfileSettingPage({ navigation }: any) {
 
   return (
     <View className="relative flex h-full w-screen flex-col items-stretch bg-[#E8E7F7] pb-8 pt-6">
-      <View className="flex flex-col px-6">
-        <Text className="mb-1 mt-6">Your Name</Text>
+      <View className="flex flex-col items-start px-6">
+        <Text className="mb-1 mt-6 px-1">Your Name</Text>
         <TextInput
           placeholder="Your Name"
           editable
@@ -46,7 +46,7 @@ export default function ProfileSettingPage({ navigation }: any) {
           onChangeText={(value) => setName(value)}
           className="h-[44px] w-full rounded-full border-[1px] border-gray-200 bg-white px-4 text-[16px]"
         />
-        <Text className="mb-1 mt-6">Your Cat's Name</Text>
+        <Text className="mb-1 mt-6 px-1">Your Cat's Name</Text>
         <TextInput
           placeholder="Your Cat's Name"
           editable
@@ -54,7 +54,7 @@ export default function ProfileSettingPage({ navigation }: any) {
           onChangeText={(value) => setCatName(value)}
           className="text-md h-[44px] w-full rounded-full border-[1px] border-gray-200 bg-white px-4 text-[16px]"
         />
-        <Text className="mb-1 mt-6">Fur Color</Text>
+        <Text className="mb-1 mt-6 px-1">Fur Color</Text>
         <RNPickerSelect
           value={furColor}
           onValueChange={(value) => {

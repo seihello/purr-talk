@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { Audio } from "expo-av";
 import React, { useEffect, useState } from "react";
 import { Dimensions, Image, View } from "react-native";
@@ -19,6 +20,8 @@ export default function RecordingView({
 }: Props) {
   const { width } = Dimensions.get("window");
 
+  const navigation = useNavigation();
+
   const [isRecording, setIsRecording] = useState(false);
 
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -36,7 +39,10 @@ export default function RecordingView({
 
   useEffect(() => {
     const record = async () => {
+      console.log("aaa");
       if (!permissionResponse) return;
+      console.log("bbb");
+
       if (permissionResponse.status !== "granted") {
         console.log("Requesting permission..");
         const newPermissionResponse = await requestPermission();
@@ -44,10 +50,14 @@ export default function RecordingView({
           return;
         }
       }
+      console.log("ccc");
+
       await Audio.setAudioModeAsync({
         allowsRecordingIOS: true,
         playsInSilentModeIOS: true,
       });
+
+      console.log("ddd");
 
       console.log("Starting to record");
       setIsRecording(true);
@@ -70,6 +80,19 @@ export default function RecordingView({
     }
     return () => clearInterval(interval);
   }, [isRecording]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("beforeRemove", async (e) => {
+      if (recording) {
+        await recording.stopAndUnloadAsync();
+        console.log("Stop!!!");
+      }
+
+      navigation.dispatch(e.data.action);
+    });
+
+    return unsubscribe;
+  }, [navigation, recording]);
 
   const onStopRecording = async () => {
     console.log("Stop recording");
