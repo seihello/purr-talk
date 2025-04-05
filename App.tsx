@@ -27,8 +27,6 @@ export default function App() {
 
   if (!fontsLoaded || isLoading) return null;
 
-  console.log("profile", profile);
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={profile ? "Home" : "Init"}>

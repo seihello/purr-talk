@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import ErrorCode from "../enum/error-code.enum";
 import RecordStatus from "../enum/record-status.enum";
 import useProfile from "../hooks/use-profile";
 import ErrorView from "../views/error-view";
@@ -11,6 +12,7 @@ export default function RecordPage({ navigation }: any) {
 
   const { profile } = useProfile();
   const [status, setStatus] = useState(RecordStatus.Recording);
+  const [errorCode, setErrorCode] = useState(ErrorCode.Other);
   const voiceUrl = useRef<string>("");
   const [translation, setTranslation] = useState("");
 
@@ -55,6 +57,7 @@ export default function RecordPage({ navigation }: any) {
       return (
         <RecordingView
           setStatus={setStatus}
+          setErrorCode={setErrorCode}
           setTranslation={setTranslation}
           voiceUrl={voiceUrl}
         />
@@ -64,6 +67,7 @@ export default function RecordPage({ navigation }: any) {
       return (
         <TranslatingView
           setStatus={setStatus}
+          setErrorCode={setErrorCode}
           translation={translation}
           setTranslation={setTranslation}
           voiceUrl={voiceUrl}
@@ -81,6 +85,6 @@ export default function RecordPage({ navigation }: any) {
       );
 
     case RecordStatus.Error:
-      return <ErrorView setStatus={setStatus} />;
+      return <ErrorView setStatus={setStatus} errorCode={errorCode} />;
   }
 }

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Dimensions, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Text from "../components/ui/text";
+import ErrorCode from "../enum/error-code.enum";
 import RecordStatus from "../enum/record-status.enum";
 import useProfile from "../hooks/use-profile";
 
@@ -11,6 +12,7 @@ const PAWS_CIRCLE_WIDTH = 0.5;
 
 type Props = {
   setStatus: React.Dispatch<React.SetStateAction<RecordStatus>>;
+  setErrorCode: React.Dispatch<React.SetStateAction<ErrorCode>>;
   translation: string;
   setTranslation: React.Dispatch<React.SetStateAction<string>>;
   voiceUrl: React.MutableRefObject<string>;
@@ -18,6 +20,7 @@ type Props = {
 
 export default function TranslatingView({
   setStatus,
+  setErrorCode,
   translation,
   setTranslation,
   voiceUrl,
@@ -64,6 +67,7 @@ export default function TranslatingView({
           setStatus(RecordStatus.Translated);
         } catch (error) {
           console.log(error);
+          setErrorCode(ErrorCode.Network);
           setStatus(RecordStatus.Error);
         }
       }

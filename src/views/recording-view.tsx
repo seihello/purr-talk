@@ -5,16 +5,20 @@ import { Dimensions, Image, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Button from "../components/ui/button";
 import Text from "../components/ui/text";
+import { MIN_RECORDING_SECONDS } from "../constants";
+import ErrorCode from "../enum/error-code.enum";
 import RecordStatus from "../enum/record-status.enum";
 
 type Props = {
   setStatus: React.Dispatch<React.SetStateAction<RecordStatus>>;
+  setErrorCode: React.Dispatch<React.SetStateAction<ErrorCode>>;
   setTranslation: React.Dispatch<React.SetStateAction<string>>;
   voiceUrl: React.MutableRefObject<string>;
 };
 
 export default function RecordingView({
   setStatus,
+  setErrorCode,
   setTranslation,
   voiceUrl,
 }: Props) {
@@ -38,34 +42,39 @@ export default function RecordingView({
   }, []);
 
   useEffect(() => {
-    const record = async () => {
-      console.log("aaa");
+    const askPermission = async () => {
       if (!permissionResponse) return;
-      console.log("bbb");
 
       if (permissionResponse.status !== "granted") {
         console.log("Requesting permission..");
-        const newPermissionResponse = await requestPermission();
-        if (newPermissionResponse.status !== "granted") {
-          return;
-        }
+        await requestPermission();
       }
-      console.log("ccc");
+    };
+    askPermission();
+  }, [permissionResponse, permissionResponse?.status]);
 
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: true,
-        playsInSilentModeIOS: true,
-      });
+  useEffect(() => {
+    const record = async () => {
+      console.log("permissionResponse", permissionResponse?.status);
+      if (!permissionResponse || permissionResponse.status !== "granted")
+        return;
 
-      console.log("ddd");
+      try {
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: true,
+          playsInSilentModeIOS: true,
+        });
 
-      console.log("Starting to record");
-      setIsRecording(true);
-      const { recording } = await Audio.Recording.createAsync(
-        Audio.RecordingOptionsPresets.HIGH_QUALITY,
-      );
-      console.log("Started recording");
-      setRecording(recording);
+        console.log("Starting to record");
+        const { recording } = await Audio.Recording.createAsync(
+          Audio.RecordingOptionsPresets.HIGH_QUALITY,
+        );
+        setRecording(recording);
+        console.log("Started recording");
+        setIsRecording(true);
+      } catch (error) {
+        console.error(error);
+      }
     };
     record();
   }, [permissionResponse, permissionResponse?.status]);
@@ -96,18 +105,28 @@ export default function RecordingView({
 
   const onStopRecording = async () => {
     console.log("Stop recording");
-    if (!recording) return;
-    setStatus(RecordStatus.Translating);
+    if (!recording) {
+      setErrorCode(ErrorCode.Other);
+      setStatus(RecordStatus.Error);
+      return;
+    }
+
     try {
       await recording.stopAndUnloadAsync();
+      if (elapsedTime < MIN_RECORDING_SECONDS) {
+        setErrorCode(ErrorCode.ShortRecording);
+        setStatus(RecordStatus.Error);
+        return;
+      }
       const uri = recording.getURI();
       console.log("Stored at", uri);
-      if (uri) {
-        voiceUrl.current = uri;
-        setStatus(RecordStatus.Translating);
-      } else {
+      if (!uri) {
+        setErrorCode(ErrorCode.Other);
         setStatus(RecordStatus.Error);
+        return;
       }
+      voiceUrl.current = uri;
+      setStatus(RecordStatus.Translating);
     } catch (error) {
       console.log(error);
       setStatus(RecordStatus.Error);
@@ -117,7 +136,7 @@ export default function RecordingView({
   if (!permissionResponse) return;
 
   return (
-    <View className="flex h-full flex-1 flex-col items-center gap-y-2 bg-primary-900 px-6 pb-8 pt-16">
+    <View className="flex h-screen flex-1 flex-col items-center gap-y-2 bg-primary-900 px-6 pb-8 pt-16">
       <Icon name="microphone" color="#F1AD5A" size={48} />
       {permissionResponse.status === "granted" ? (
         <Text className="font-nunito-bold text-[28px] text-white">

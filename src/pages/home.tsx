@@ -26,26 +26,29 @@ export default function HomePage({ navigation }: any) {
       bounces={true}
     >
       <View className="z-20 flex min-h-screen w-full flex-col pb-16">
-        <View className="relative flex w-full flex-row items-center justify-between bg-primary-900 px-8 pb-16 pt-24">
-          <View className="flex flex-col">
-            <Image
-              source={require(`../../assets/img/purr_talk_white.png`)}
-              style={{
-                width: 130,
-                height: 24,
-              }}
-            />
-            <Text className="mt-2 font-nunito-semibold text-[20px] text-[#F6F6F6]">{`Hi ${profile.name} and ${profile.catName}!`}</Text>
+        <View className="relative flex w-full flex-row items-center justify-between bg-primary-900 px-6 pb-16 pt-20">
+          <View className="flex w-full flex-col">
+            <View className="flex w-full flex-row items-center justify-between">
+              <Image
+                source={require(`../../assets/img/purr_talk_white.png`)}
+                style={{
+                  width: 130,
+                  height: 24,
+                }}
+              />
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.push("Your Profile");
+                }}
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F6F6F6]/80"
+                activeOpacity={0.8}
+              >
+                <Icon name="cog-outline" color="#4651D1" size={24} />
+              </TouchableOpacity>
+            </View>
+            <Text className="mt-2 text-left font-nunito-semibold text-[20px] text-[#F6F6F6]">{`Hi ${profile.name} and ${profile.catName}!`}</Text>
           </View>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.push("Your Profile");
-            }}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F6F6F6]/80"
-            activeOpacity={0.8}
-          >
-            <Icon name="cog-outline" color="#4651D1" size={24} />
-          </TouchableOpacity>
+
           <View
             className="absolute bottom-0 rounded-full bg-white"
             style={{

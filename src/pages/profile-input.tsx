@@ -15,7 +15,7 @@ export default function ProfileInputPage({ navigation }: any) {
 
   const [name, setName] = useState<string>("");
   const [catName, setCatName] = useState<string>("");
-  const [furColor, setFurColor] = useState<FurColor>(FurColor.Tuxedo);
+  const [furColor, setFurColor] = useState<FurColor>();
   const [isChecked, setIsChecked] = useState(false);
   const [isTermsOpen, setIsTermsOpen] = useState(false);
   const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
@@ -35,24 +35,26 @@ export default function ProfileInputPage({ navigation }: any) {
       </View>
 
       <View className="flex grow flex-col px-6">
-        <Text className="mb-1 mt-6">Your Name</Text>
+        <Text className="mb-1 mt-6 text-left">Your Name</Text>
         <TextInput
           placeholder="Your Name"
           editable
           onChangeText={(value) => setName(value)}
           className="h-[44px] w-full rounded-full border-[1px] border-gray-200 bg-white px-4 text-[16px]"
         />
-        <Text className="mb-1 mt-6">Your Cat's Name</Text>
+        <Text className="mb-1 mt-6 text-left">Your Cat's Name</Text>
         <TextInput
           placeholder="Your Cat's Name"
           editable
           onChangeText={(value) => setCatName(value)}
           className="text-md h-[44px] w-full rounded-full border-[1px] border-gray-200 bg-white px-4 text-[16px]"
         />
-        <Text className="mb-1 mt-6">Fur Color</Text>
+        <Text className="mb-1 mt-6 text-left">Fur Color</Text>
         <RNPickerSelect
           value={furColor}
-          onValueChange={(value) => setFurColor(furColor)}
+          onValueChange={(value) => {
+            setFurColor(value);
+          }}
           items={Object.values(FurColor).map((color, index) => ({
             label: color,
             value: color,
@@ -129,7 +131,7 @@ export default function ProfileInputPage({ navigation }: any) {
           color="#4651D1"
         />
         <View className="grow">
-          <Text className="text-[16px]">
+          <Text className="text-left text-[16px]">
             I agree to PurrTalk's{" "}
             <Text
               className="text-primary-900 underline"

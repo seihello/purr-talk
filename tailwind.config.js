@@ -13,7 +13,7 @@ module.exports = {
         },
         warning: {
           100: "#FFF4E4",
-          500: "#B1A878",
+          500: "#94907E",
           900: "#9E8E00",
         },
         error: {

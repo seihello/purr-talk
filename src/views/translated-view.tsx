@@ -23,14 +23,20 @@ export default function TranslatedView({
   voiceUrl,
 }: Props) {
   const [sound, setSound] = useState<Audio.Sound>(new Sound());
+  const [isPlayed, setIsPlayed] = useState(false);
 
   async function onPlayCatVoice() {
     // const { sound } = await Audio.Sound.createAsync(route.params.voiceUrl);
-    await sound.loadAsync({ uri: voiceUrl.current }, {}, true);
-    // setSound(sound);
-
-    console.log("Playing Sound");
-    await sound.playAsync();
+    if (!isPlayed) {
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: false,
+      });
+      await sound.loadAsync({ uri: voiceUrl.current }, {}, true);
+      setIsPlayed(true);
+      await sound.playAsync();
+    } else {
+      await sound.replayAsync();
+    }
   }
 
   return (

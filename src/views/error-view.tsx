@@ -2,12 +2,15 @@ import React from "react";
 import { Dimensions, Image, View } from "react-native";
 import Button from "../components/ui/button";
 import Text from "../components/ui/text";
+import { MIN_RECORDING_SECONDS } from "../constants";
+import ErrorCode from "../enum/error-code.enum";
 import RecordStatus from "../enum/record-status.enum";
 
 type Props = {
   setStatus: React.Dispatch<React.SetStateAction<RecordStatus>>;
+  errorCode: ErrorCode;
 };
-export default function ErrorView({ setStatus }: Props) {
+export default function ErrorView({ setStatus, errorCode }: Props) {
   const { width } = Dimensions.get("window");
 
   return (
@@ -26,8 +29,11 @@ export default function ErrorView({ setStatus }: Props) {
           Oops! Something went wrong.
         </Text>
         <Text>
-          We couldn’t translate that meow. Don’t worry, your cat’s secrets are
-          safe with us!
+          {errorCode === ErrorCode.Network
+            ? "Please check your internet connection or try again later."
+            : errorCode === ErrorCode.ShortRecording
+              ? `Your cat has more to say! Please record at least ${MIN_RECORDING_SECONDS} seconds for our translator to work its magic!`
+              : "We couldn’t translate that meow. Don’t worry, your cat’s secrets are safe with us!"}
         </Text>
       </View>
       <Button
