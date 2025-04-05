@@ -66,7 +66,7 @@ export default function TranslatingView({
 
           setStatus(RecordStatus.Translated);
         } catch (error) {
-          console.log(error);
+          console.error(error);
           setErrorCode(ErrorCode.Network);
           setStatus(RecordStatus.Error);
         }
@@ -152,9 +152,6 @@ function getPawCoordinates(
   // Calculate the icon's coordinates
   const x = radius + radius * Math.cos(angle) + (screenWidth - diameter) / 2;
   const y = radius + radius * Math.sin(angle);
-
-  // console.log(`${centerX}, ${centerY}, ${radius}, ${Math.sin(angle)}`);
-  // console.log(`${index}: (${x}, ${y}) ${angle}`);
 
   return { x, y };
 }

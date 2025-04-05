@@ -1,4 +1,5 @@
-import React from "react";
+import { Audio } from "expo-av";
+import React, { useEffect } from "react";
 import {
   Dimensions,
   Image,
@@ -17,7 +18,21 @@ export default function HomePage({ navigation }: any) {
 
   const { profile } = useProfile();
 
-  if (!profile) return;
+  const [permissionResponse, requestPermission] = Audio.usePermissions();
+
+  useEffect(() => {
+    const askPermission = async () => {
+      if (!permissionResponse) return;
+
+      if (permissionResponse.status === Audio.PermissionStatus.UNDETERMINED) {
+        await requestPermission();
+      }
+    };
+    askPermission();
+  }, [permissionResponse, permissionResponse?.status]);
+
+  if (!profile || !permissionResponse) return;
+
   return (
     <ScrollView
       className="relative z-0 h-screen w-screen bg-white"
@@ -84,12 +99,20 @@ export default function HomePage({ navigation }: any) {
                 height: (width * 71) / 364,
               }}
             />
+            {permissionResponse.status === Audio.PermissionStatus.DENIED && (
+              <Text className="text-sm text-red-500">
+                Please enable microphone access to start.
+              </Text>
+            )}
             <Button
               title="Start recording"
               onPress={() => {
                 navigation.push("Record");
               }}
               icon={<Icon name="microphone" color="white" size={36} />}
+              disabled={
+                permissionResponse.status !== Audio.PermissionStatus.GRANTED
+              }
             />
           </View>
           <View className="flex flex-col items-center gap-y-2 rounded-lg border border-dashed border-gray-300 bg-[#EFEFEF] p-4 shadow-gray-500">

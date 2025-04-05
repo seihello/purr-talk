@@ -8,8 +8,6 @@ import TranslatedView from "../views/translated-view";
 import TranslatingView from "../views/translating-view";
 
 export default function RecordPage({ navigation }: any) {
-  // console.log("width", width);
-
   const { profile } = useProfile();
   const [status, setStatus] = useState(RecordStatus.Recording);
   const [errorCode, setErrorCode] = useState(ErrorCode.Other);

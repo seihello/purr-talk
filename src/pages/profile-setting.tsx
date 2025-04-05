@@ -26,7 +26,6 @@ export default function ProfileSettingPage({ navigation }: any) {
 
   useEffect(() => {
     if (profile && !name && !catName && !furColor) {
-      console.log("saved value", profile.furColor);
       setName(profile.name);
       setCatName(profile.catName);
       setFurColor(profile.furColor);

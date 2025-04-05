@@ -12,7 +12,7 @@ export default function useProfile() {
         const profile = await getProfile();
         setProfile(profile);
       } catch (error) {
-        console.log("Profile not set");
+        console.error(error);
       } finally {
         setIsLoading(false);
       }
