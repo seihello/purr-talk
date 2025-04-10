@@ -1,12 +1,17 @@
 import Checkbox from "expo-checkbox";
 import React, { useState } from "react";
-import { Dimensions, Image, TextInput, View } from "react-native";
+import {
+  Dimensions,
+  Image,
+  Linking,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import RNPickerSelect from "react-native-picker-select";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import PrivacyPolicy from "../components/profile-input/privacy-policy";
-import TermsAndConditions from "../components/profile-input/terms-and-conditions";
 import Button from "../components/ui/button";
 import Text from "../components/ui/text";
+import { PRIVACY_POLICY, TERMS_AND_CONDITIONS } from "../constants/urls";
 import FurColor from "../enum/fur-color.enum";
 import updateProfile from "../lib/progress/update-profile";
 
@@ -86,44 +91,6 @@ export default function ProfileInputPage({ navigation }: any) {
         />
       </View>
 
-      {isTermsOpen && (
-        <>
-          <View
-            onTouchEnd={(e: any) => {
-              e.stopPropagation();
-              setIsTermsOpen(false);
-            }}
-            className="absolute z-50 bg-white"
-            style={{
-              right: width * 0.05 + 16,
-              top: height * 0.1 + 16,
-            }}
-          >
-            <Icon name="close-box" color="#4651D1" size={32} />
-          </View>
-          <TermsAndConditions />
-        </>
-      )}
-
-      {isPrivacyPolicyOpen && (
-        <>
-          <View
-            onTouchEnd={(e: any) => {
-              e.stopPropagation();
-              setIsPrivacyPolicyOpen(false);
-            }}
-            className="absolute z-50 bg-white"
-            style={{
-              right: width * 0.05 + 16,
-              top: height * 0.1 + 16,
-            }}
-          >
-            <Icon name="close-box" color="#4651D1" size={32} />
-          </View>
-          <PrivacyPolicy />
-        </>
-      )}
-
       <View className="mb-4 flex flex-row items-center justify-start gap-x-4 px-6">
         <Checkbox
           value={isChecked}
@@ -131,31 +98,39 @@ export default function ProfileInputPage({ navigation }: any) {
           color="#4651D1"
         />
         <View className="grow">
-          <Text className="text-left text-[16px]">
-            I agree to PurrTalk's{" "}
-            <Text
-              className="text-primary-900 underline"
-              onTouchEnd={(e: any) => {
+          <View className="flex flex-row items-center">
+            <Text className="text-[16px]">I agree to PurrTalk's </Text>
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={async (e: any) => {
                 e.stopPropagation();
-                setIsTermsOpen(true);
-                setIsPrivacyPolicyOpen(false);
+                if (await Linking.canOpenURL(TERMS_AND_CONDITIONS)) {
+                  await Linking.openURL(TERMS_AND_CONDITIONS);
+                }
               }}
             >
-              Terms and Conditions{" "}
-            </Text>
-            {"\n"}and{" "}
-            <Text
-              className="text-primary-900 underline"
-              onTouchEnd={(e: any) => {
+              <Text className="text-[16px] text-primary-900 underline">
+                Terms and Conditions{" "}
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View className="flex flex-row items-center">
+            <Text className="text-[16px]">and </Text>
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={async (e: any) => {
                 e.stopPropagation();
-                setIsPrivacyPolicyOpen(true);
-                setIsTermsOpen(false);
+                if (await Linking.canOpenURL(PRIVACY_POLICY)) {
+                  await Linking.openURL(PRIVACY_POLICY);
+                }
               }}
             >
-              Privacy Policy
-            </Text>
-            .
-          </Text>
+              <Text className="text-[16px] text-primary-900 underline">
+                Privacy Policy
+              </Text>
+            </TouchableOpacity>
+            <Text className="text-[16px]">.</Text>
+          </View>
         </View>
       </View>
 
