@@ -1,6 +1,6 @@
-import { Audio } from "expo-av";
+import { Audio, AVPlaybackStatus } from "expo-av";
 import { Sound } from "expo-av/build/Audio";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Image, ScrollView, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import TemplateView from "../components/template-view";
@@ -23,22 +23,35 @@ export default function TranslatedView({
   translation,
   voiceUrl,
 }: Props) {
-  const [sound, setSound] = useState<Audio.Sound>(new Sound());
-  const [isPlayed, setIsPlayed] = useState(false);
+  const [sound, _] = useState<Audio.Sound>(new Sound());
+  const [playbackStatus, setPlaybackStatus] = useState<AVPlaybackStatus>();
 
-  async function onPlayCatVoice() {
-    // const { sound } = await Audio.Sound.createAsync(route.params.voiceUrl);
-    if (!isPlayed) {
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: false,
-      });
-      await sound.loadAsync({ uri: voiceUrl.current }, {}, true);
-      setIsPlayed(true);
-      await sound.playAsync();
-    } else {
-      await sound.replayAsync();
+  async function onPlay() {
+    if (playbackStatus?.isLoaded) {
+      if (playbackStatus.positionMillis === playbackStatus.durationMillis) {
+        await sound.replayAsync();
+      } else {
+        await sound.playAsync();
+      }
     }
   }
+
+  async function onPause() {
+    await sound.pauseAsync();
+  }
+
+  useEffect(() => {
+    const init = async () => {
+      if (sound) {
+        sound.setOnPlaybackStatusUpdate((status) => setPlaybackStatus(status));
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: false,
+        });
+        await sound.loadAsync({ uri: voiceUrl.current }, {}, true);
+      }
+    };
+    init();
+  }, [sound]);
 
   return (
     <TemplateView background="light" className="px-4 pb-8 pt-8">
@@ -69,15 +82,29 @@ export default function TranslatedView({
               height: 43,
             }}
           />
-          <TouchableOpacity
-            onPress={() => {
-              onPlayCatVoice();
-            }}
-            className="flex h-[42px] w-[42px] flex-col items-center justify-center rounded-full bg-primary-900 px-[5px]"
-            activeOpacity={0.8}
-          >
-            <Icon name="play-outline" color="white" size={36} />
-          </TouchableOpacity>
+          {playbackStatus &&
+          playbackStatus.isLoaded &&
+          playbackStatus.isPlaying ? (
+            <TouchableOpacity onPress={() => onPause()} activeOpacity={0.8}>
+              <Image
+                source={require(`../../assets/img/icons/pause.png`)}
+                style={{
+                  width: 30,
+                  height: 30,
+                }}
+              />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity onPress={() => onPlay()} activeOpacity={0.8}>
+              <Image
+                source={require(`../../assets/img/icons/play.png`)}
+                style={{
+                  width: 30,
+                  height: 30,
+                }}
+              />
+            </TouchableOpacity>
+          )}
         </View>
         <View
           className="absolute bottom-0 left-16"
