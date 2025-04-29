@@ -3,6 +3,7 @@ import { Audio } from "expo-av";
 import React, { useEffect, useState } from "react";
 import { Dimensions, Image, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import TemplateView from "../components/template-view";
 import Button from "../components/ui/button";
 import Text from "../components/ui/text";
 import { MIN_RECORDING_SECONDS } from "../constants";
@@ -112,7 +113,10 @@ export default function RecordingView({
   };
 
   return (
-    <View className="flex h-screen flex-1 flex-col items-center gap-y-2 bg-primary-900 px-6 pb-8 pt-16">
+    <TemplateView
+      background="dark"
+      className="flex flex-col items-center gap-y-2 px-6 pb-8 pt-[136px]"
+    >
       <Icon name="microphone" color="#F1AD5A" size={48} />
 
       <Text className="font-nunito-bold text-[28px] text-white">
@@ -144,6 +148,6 @@ export default function RecordingView({
         }}
         variant="outline"
       />
-    </View>
+    </TemplateView>
   );
 }

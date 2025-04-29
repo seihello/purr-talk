@@ -3,6 +3,7 @@ import { Sound } from "expo-av/build/Audio";
 import { useState } from "react";
 import { Image, ScrollView, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import TemplateView from "../components/template-view";
 import Button from "../components/ui/button";
 import Text from "../components/ui/text";
 import RecordStatus from "../enum/record-status.enum";
@@ -40,7 +41,7 @@ export default function TranslatedView({
   }
 
   return (
-    <View className="flex h-full w-full flex-col items-center justify-between bg-primary-300 px-4 pb-8">
+    <TemplateView background="light" className="px-4 pb-8 pt-8">
       <View className="flex grow flex-col items-center justify-center gap-y-1 pb-2">
         <Text className="text-center font-nunito-bold text-[32px]">
           Purrfect!
@@ -104,6 +105,6 @@ export default function TranslatedView({
         }}
         variant="outline"
       />
-    </View>
+    </TemplateView>
   );
 }

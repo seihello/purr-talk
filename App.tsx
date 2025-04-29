@@ -71,14 +71,12 @@ export default function App() {
           component={RecordPage}
           options={{
             headerShadowVisible: false,
-            headerStyle: {
-              backgroundColor: "#4651D1",
-            },
             headerTintColor: "white",
             headerTitleStyle: {
               color: "white",
               fontFamily: "NunitoSemiBold",
             },
+            headerTransparent: true,
           }}
         />
         <Stack.Screen

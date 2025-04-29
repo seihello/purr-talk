@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Dimensions, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import TemplateView from "../components/template-view";
 import Text from "../components/ui/text";
 import ErrorCode from "../enum/error-code.enum";
 import RecordStatus from "../enum/record-status.enum";
@@ -97,7 +98,10 @@ export default function TranslatingView({
   });
 
   return (
-    <View className="flex h-screen w-full flex-col items-center gap-y-16 bg-primary-900 pt-[120px]">
+    <TemplateView
+      background="dark"
+      className="flex flex-col items-center gap-y-16 pt-48"
+    >
       <View className="mb-4 px-12">
         <Text className="text-center font-nunito-bold text-[28px] text-white">
           Turning meows into human words...
@@ -128,7 +132,7 @@ export default function TranslatingView({
         ))}
         {translation && <Icon name="check" color="white" size={76} />}
       </View>
-    </View>
+    </TemplateView>
   );
 }
 

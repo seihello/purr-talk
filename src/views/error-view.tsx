@@ -1,5 +1,6 @@
 import React from "react";
 import { Dimensions, Image, View } from "react-native";
+import TemplateView from "../components/template-view";
 import Button from "../components/ui/button";
 import Text from "../components/ui/text";
 import { MIN_RECORDING_SECONDS } from "../constants";
@@ -14,7 +15,10 @@ export default function ErrorView({ setStatus, errorCode }: Props) {
   const { width } = Dimensions.get("window");
 
   return (
-    <View className="flex h-full w-full flex-col items-center justify-between bg-primary-300 px-4 pb-8">
+    <TemplateView
+      background="light"
+      className="flex flex-col items-center justify-between px-4 pb-8 pt-12"
+    >
       <View className="mb-8 flex max-h-96 grow flex-col justify-end">
         <Image
           source={require(`../../assets/img/tangled_cat.png`)}
@@ -42,6 +46,6 @@ export default function ErrorView({ setStatus, errorCode }: Props) {
           setStatus(RecordStatus.Recording);
         }}
       />
-    </View>
+    </TemplateView>
   );
 }

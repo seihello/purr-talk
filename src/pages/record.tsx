@@ -21,9 +21,6 @@ export default function RecordPage({ navigation }: any) {
     ) {
       navigation.setOptions({
         headerShadowVisible: false,
-        headerStyle: {
-          backgroundColor: "#4651D1",
-        },
         headerTintColor: "white",
         headerTitleStyle: {
           color: "white",
@@ -36,9 +33,6 @@ export default function RecordPage({ navigation }: any) {
     ) {
       navigation.setOptions({
         headerShadowVisible: false,
-        headerStyle: {
-          backgroundColor: "#E8E7F7",
-        },
         headerTintColor: "#4651D1",
         headerTitleStyle: {
           color: "black",
