@@ -1,5 +1,6 @@
 import { Audio } from "expo-av";
-import React, { useEffect } from "react";
+import LottieView from "lottie-react-native";
+import React, { useEffect, useRef } from "react";
 import {
   Dimensions,
   Image,
@@ -11,7 +12,6 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Button from "../components/ui/button";
 import Text from "../components/ui/text";
 import useProfile from "../hooks/use-profile";
-import CAT_IMAGES from "../lib/cats/cat-images";
 
 export default function HomePage({ navigation }: any) {
   const { width } = Dimensions.get("window");
@@ -30,6 +30,11 @@ export default function HomePage({ navigation }: any) {
     };
     askPermission();
   }, [permissionResponse, permissionResponse?.status]);
+
+  const animation = useRef<LottieView>(null);
+  useEffect(() => {
+    animation.current?.play();
+  }, []);
 
   if (!profile || !permissionResponse) return;
 
@@ -78,14 +83,17 @@ export default function HomePage({ navigation }: any) {
         </View>
         <View className="grow space-y-6 bg-white px-4 pt-16">
           <View className="flex flex-col items-center gap-y-2 rounded-lg bg-[#F4EAE1] p-4 shadow-sm shadow-gray-500">
-            <Image
-              source={CAT_IMAGES[profile.furColor]}
+            <LottieView
+              autoPlay
+              ref={animation}
               style={{
                 width: 283,
                 height: 120,
-                transform: [{ translateY: -24 }, { scaleX: -1 }],
+                transform: [{ translateY: -14 }, { scaleX: -1 }],
+                position: "absolute",
+                bottom: "100%",
               }}
-              className="absolute bottom-full"
+              source={require("../../assets/lottiefiles/solid_whitee.json")}
             />
             <Icon name="microphone" color="#4651D1" size={36} />
             <Text className="font-nunito-bold text-[24px]">
