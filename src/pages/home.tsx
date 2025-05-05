@@ -1,6 +1,6 @@
 import { Audio } from "expo-av";
 import LottieView from "lottie-react-native";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import {
   Dimensions,
   Image,
@@ -31,11 +31,6 @@ export default function HomePage({ navigation }: any) {
     };
     askPermission();
   }, [permissionResponse, permissionResponse?.status]);
-
-  const animation = useRef<LottieView>(null);
-  useEffect(() => {
-    animation.current?.play();
-  }, []);
 
   if (!profile || !permissionResponse) return;
 
@@ -86,7 +81,6 @@ export default function HomePage({ navigation }: any) {
           <View className="flex flex-col items-center gap-y-2 rounded-lg bg-[#F4EAE1] p-4 shadow-sm shadow-gray-500">
             <LottieView
               autoPlay
-              ref={animation}
               style={{
                 width: 283,
                 height: 120,
