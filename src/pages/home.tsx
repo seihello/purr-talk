@@ -12,6 +12,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Button from "../components/ui/button";
 import Text from "../components/ui/text";
 import useProfile from "../hooks/use-profile";
+import CAT_ANIMATIONS from "../lib/cats/cat-animations";
 
 export default function HomePage({ navigation }: any) {
   const { width } = Dimensions.get("window");
@@ -93,7 +94,7 @@ export default function HomePage({ navigation }: any) {
                 position: "absolute",
                 bottom: "100%",
               }}
-              source={require("../../assets/lottiefiles/solid_whitee.json")}
+              source={CAT_ANIMATIONS[profile.furColor]}
             />
             <Icon name="microphone" color="#4651D1" size={36} />
             <Text className="font-nunito-bold text-[24px]">

@@ -89,8 +89,8 @@ export default function TranslatedView({
               <Image
                 source={require(`../../assets/img/icons/pause.png`)}
                 style={{
-                  width: 30,
-                  height: 30,
+                  width: 36,
+                  height: 36,
                 }}
               />
             </TouchableOpacity>
@@ -99,8 +99,8 @@ export default function TranslatedView({
               <Image
                 source={require(`../../assets/img/icons/play.png`)}
                 style={{
-                  width: 30,
-                  height: 30,
+                  width: 36,
+                  height: 36,
                 }}
               />
             </TouchableOpacity>
