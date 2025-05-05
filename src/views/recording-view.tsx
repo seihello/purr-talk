@@ -1,7 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import { Audio } from "expo-av";
-import React, { useEffect, useState } from "react";
-import { Dimensions, Image, View } from "react-native";
+import LottieView from "lottie-react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { Dimensions, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import TemplateView from "../components/template-view";
 import Button from "../components/ui/button";
@@ -112,6 +113,11 @@ export default function RecordingView({
     }
   };
 
+  const animation = useRef<LottieView>(null);
+  useEffect(() => {
+    animation.current?.play();
+  }, []);
+
   return (
     <TemplateView
       background="dark"
@@ -124,12 +130,14 @@ export default function RecordingView({
       </Text>
 
       <View className="flex flex-1 flex-col justify-center">
-        <Image
-          source={require(`../../assets/img/white_pink_wave.png`)}
+        <LottieView
+          autoPlay
+          ref={animation}
           style={{
             width: width,
             height: (width * 111) / 393,
           }}
+          source={require(`../../assets/lottiefiles/sound_wave.json`)}
         />
       </View>
 
