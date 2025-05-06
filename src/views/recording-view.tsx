@@ -7,7 +7,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import TemplateView from "../components/template-view";
 import Button from "../components/ui/button";
 import Text from "../components/ui/text";
-import { MIN_RECORDING_SECONDS } from "../constants";
+import { MAX_RECORDING_SECONDS, MIN_RECORDING_SECONDS } from "../constants";
 import ErrorCode from "../enum/error-code.enum";
 import RecordStatus from "../enum/record-status.enum";
 
@@ -72,6 +72,15 @@ export default function RecordingView({
     }
     return () => clearInterval(interval);
   }, [isRecording]);
+
+  useEffect(() => {
+    const run = async () => {
+      if (elapsedTime === MAX_RECORDING_SECONDS) {
+        await onStopRecording();
+      }
+    };
+    run();
+  }, [elapsedTime]);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("beforeRemove", async (e) => {

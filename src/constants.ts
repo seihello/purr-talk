@@ -1,1 +1,2 @@
 export const MIN_RECORDING_SECONDS = 3;
+export const MAX_RECORDING_SECONDS = 30;
