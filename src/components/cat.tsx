@@ -25,7 +25,7 @@ export default function Cat({ furColor, facePosition, ...props }: Props) {
           style={{
             width: 252,
             height: 25,
-            transform: [{ translateX: 24 }, { translateY: -24 }],
+            transform: [{ translateX: 22 }, { translateY: -24 }],
             position: "absolute",
             bottom: 0,
           }}
@@ -35,7 +35,7 @@ export default function Cat({ furColor, facePosition, ...props }: Props) {
           style={{
             width: 283,
             height: 120,
-            transform: [{ translateY: -32 }],
+            transform: [{ translateY: -30 }],
             position: "absolute",
           }}
           autoPlay
