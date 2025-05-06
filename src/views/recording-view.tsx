@@ -131,7 +131,7 @@ export default function RecordingView({
             width: width,
             height: (width * 111) / 393,
           }}
-          source={require(`../../assets/lottiefiles/sound_wave.json`)}
+          source={require(`../../assets/components/sound_wave.json`)}
         />
       </View>
 
