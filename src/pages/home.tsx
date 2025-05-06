@@ -1,5 +1,4 @@
 import { Audio } from "expo-av";
-import LottieView from "lottie-react-native";
 import React, { useEffect } from "react";
 import {
   Dimensions,
@@ -9,10 +8,10 @@ import {
   View,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Cat from "../components/cat";
 import Button from "../components/ui/button";
 import Text from "../components/ui/text";
 import useProfile from "../hooks/use-profile";
-import CAT_ANIMATIONS from "../lib/cats/cat-animations";
 
 export default function HomePage({ navigation }: any) {
   const { width } = Dimensions.get("window");
@@ -42,7 +41,7 @@ export default function HomePage({ navigation }: any) {
       bounces={true}
     >
       <View className="z-20 flex min-h-screen w-full flex-col pb-16">
-        <View className="relative flex w-full flex-row items-center justify-between bg-primary-900 px-6 pb-16 pt-20">
+        <View className="relative flex w-full flex-row items-center justify-between bg-primary-900 px-6 pb-[72px] pt-20">
           <View className="flex w-full flex-col">
             <View className="flex w-full flex-row items-center justify-between">
               <Image
@@ -62,7 +61,7 @@ export default function HomePage({ navigation }: any) {
                 <Icon name="cog-outline" color="#4651D1" size={24} />
               </TouchableOpacity>
             </View>
-            <Text className="mt-2 text-left font-nunito-semibold text-[20px] text-[#F6F6F6]">{`Hi ${profile.name} and ${profile.catName}!`}</Text>
+            <Text className="text-left font-nunito-semibold text-[20px] text-[#F6F6F6]">{`Hi ${profile.name} and ${profile.catName}!`}</Text>
           </View>
 
           <View
@@ -79,7 +78,14 @@ export default function HomePage({ navigation }: any) {
         </View>
         <View className="grow space-y-6 bg-white px-4 pt-16">
           <View className="flex flex-col items-center gap-y-2 rounded-lg bg-[#F4EAE1] p-4 shadow-sm shadow-gray-500">
-            <LottieView
+            <Cat
+              furColor={profile.furColor}
+              style={{
+                bottom: "100%",
+                position: "absolute",
+              }}
+            />
+            {/* <LottieView
               autoPlay
               style={{
                 width: 283,
@@ -89,7 +95,7 @@ export default function HomePage({ navigation }: any) {
                 bottom: "100%",
               }}
               source={CAT_ANIMATIONS[profile.furColor]}
-            />
+            /> */}
             <Icon name="microphone" color="#4651D1" size={36} />
             <Text className="font-nunito-bold text-[24px]">
               Record your cat
