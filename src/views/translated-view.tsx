@@ -1,6 +1,7 @@
 import { Audio, AVPlaybackStatus } from "expo-av";
 import { Sound } from "expo-av/build/Audio";
-import { useEffect, useState } from "react";
+import LottieView from "lottie-react-native";
+import { useEffect, useRef, useState } from "react";
 import { Image, ScrollView, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Cat from "../components/cat";
@@ -30,14 +31,18 @@ export default function TranslatedView({
     if (playbackStatus?.isLoaded) {
       if (playbackStatus.positionMillis === playbackStatus.durationMillis) {
         await sound.replayAsync();
+        soundWave.current?.reset();
+        soundWave.current?.play();
       } else {
         await sound.playAsync();
+        soundWave.current?.resume();
       }
     }
   }
 
   async function onPause() {
     await sound.pauseAsync();
+    soundWave.current?.pause();
   }
 
   useEffect(() => {
@@ -52,6 +57,16 @@ export default function TranslatedView({
     };
     init();
   }, [sound]);
+
+  useEffect(() => {
+    if (playbackStatus?.isLoaded) {
+      if (!playbackStatus.isPlaying && !playbackStatus.shouldPlay) {
+        soundWave.current?.pause();
+      }
+    }
+  });
+
+  const soundWave = useRef<LottieView>(null);
 
   return (
     <TemplateView background="light" className="px-4 pb-8 pt-8">
@@ -75,8 +90,9 @@ export default function TranslatedView({
         </ScrollView>
         <View className="my-6 h-[1px] bg-gray-100" />
         <View className="flex flex-row items-center justify-between">
-          <Image
-            source={require(`../../assets/img/blue_pink_wave.png`)}
+          <LottieView
+            source={require(`../../assets/components/sound_wave_loop.json`)}
+            ref={soundWave}
             style={{
               width: 236,
               height: 43,
