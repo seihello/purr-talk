@@ -63,18 +63,18 @@ export default function TranslatedView({
           Your translation is complete
         </Text>
       </View>
-      <View className="relative flex w-full shrink grow-0 flex-col rounded-xl bg-white px-6 py-6">
+      <View className="relative flex w-full shrink grow-0 flex-col items-stretch rounded-xl bg-white px-6 py-6">
         <ScrollView
           alwaysBounceHorizontal={false}
           alwaysBounceVertical={false}
           bounces={true}
         >
-          <Text className="font-nunito-semibold text-[24px] text-primary-900">
+          <Text className="text-left font-nunito-semibold text-[24px] text-primary-900">
             {translation}
           </Text>
         </ScrollView>
-        <View className="my-6 h-[1px] w-full bg-gray-100" />
-        <View className="flex w-full flex-row items-center justify-center gap-x-4">
+        <View className="my-6 h-[1px] bg-gray-100" />
+        <View className="flex flex-row items-center justify-between">
           <Image
             source={require(`../../assets/img/blue_pink_wave.png`)}
             style={{
