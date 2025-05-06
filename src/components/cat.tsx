@@ -6,9 +6,10 @@ import CAT_ANIMATIONS from "../lib/cats/cat-animations";
 
 type Props = {
   furColor: FurColor;
+  facePosition: "right" | "left";
 } & ViewProps;
 
-export default function Cat({ furColor, ...props }: Props) {
+export default function Cat({ furColor, facePosition, ...props }: Props) {
   return (
     <View {...props}>
       <View
@@ -16,7 +17,7 @@ export default function Cat({ furColor, ...props }: Props) {
         style={{
           width: 283,
           height: 120,
-          transform: [{ scaleX: -1 }],
+          transform: [{ scaleX: facePosition === "right" ? -1 : 1 }],
         }}
       >
         <Image

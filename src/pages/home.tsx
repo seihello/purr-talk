@@ -80,6 +80,7 @@ export default function HomePage({ navigation }: any) {
           <View className="flex flex-col items-center gap-y-2 rounded-lg bg-[#F4EAE1] p-4 shadow-sm shadow-gray-500">
             <Cat
               furColor={profile.furColor}
+              facePosition="right"
               style={{
                 bottom: "100%",
                 position: "absolute",

@@ -3,11 +3,11 @@ import { Sound } from "expo-av/build/Audio";
 import { useEffect, useState } from "react";
 import { Image, ScrollView, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Cat from "../components/cat";
 import TemplateView from "../components/template-view";
 import Button from "../components/ui/button";
 import Text from "../components/ui/text";
 import RecordStatus from "../enum/record-status.enum";
-import CAT_IMAGES from "../lib/cats/cat-images";
 import Profile from "../types/profile.type";
 
 type Props = {
@@ -115,15 +115,12 @@ export default function TranslatedView({
           <Icon name="triangle" color="white" size={36} />
         </View>
       </View>
-      <View className="flex grow items-center justify-center">
-        <Image
-          source={CAT_IMAGES[profile.furColor]}
-          style={{
-            width: 283,
-            height: 120,
-          }}
-        />
-      </View>
+
+      <Cat
+        furColor={profile.furColor}
+        facePosition="left"
+        className="flex grow items-center justify-center"
+      />
 
       <Button
         title="Re-record"

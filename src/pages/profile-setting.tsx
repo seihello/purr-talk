@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, Image, TextInput, View } from "react-native";
+import { Dimensions, TextInput, View } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
+import Cat from "../components/cat";
 import Button from "../components/ui/button";
 import Text from "../components/ui/text";
 import FurColor from "../enum/fur-color.enum";
 import useProfile from "../hooks/use-profile";
-import CAT_IMAGES from "../lib/cats/cat-images";
 import updateProfile from "../lib/progress/update-profile";
 
 export default function ProfileSettingPage({ navigation }: any) {
@@ -80,15 +80,12 @@ export default function ProfileSettingPage({ navigation }: any) {
           placeholder={{ label: "Select Fur Color", value: null }}
         />
       </View>
-      <View className="flex w-full grow items-center justify-center">
-        <Image
-          source={CAT_IMAGES[furColor ?? profile.furColor]}
-          style={{
-            width: 283,
-            height: 120,
-          }}
-        />
-      </View>
+
+      <Cat
+        furColor={furColor ?? profile.furColor}
+        facePosition="left"
+        className="flex w-full grow items-center justify-center"
+      />
 
       <View className="px-6">
         <Button
