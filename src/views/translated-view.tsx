@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { Audio, AVPlaybackStatus } from "expo-av";
 import { Sound } from "expo-av/build/Audio";
 import LottieView from "lottie-react-native";
@@ -24,6 +25,8 @@ export default function TranslatedView({
   translation,
   voiceUrl,
 }: Props) {
+  const navigation = useNavigation();
+
   const [sound, _] = useState<Audio.Sound>(new Sound());
   const [playbackStatus, setPlaybackStatus] = useState<AVPlaybackStatus>();
 
@@ -65,6 +68,18 @@ export default function TranslatedView({
       }
     }
   });
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("beforeRemove", async (e) => {
+      if (sound) {
+        await sound.stopAsync();
+      }
+
+      navigation.dispatch(e.data.action);
+    });
+
+    return unsubscribe;
+  }, [navigation, sound]);
 
   const soundWave = useRef<LottieView>(null);
 
