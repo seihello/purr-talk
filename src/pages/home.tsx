@@ -84,7 +84,7 @@ export default function HomePage({ navigation }: any) {
               style={{
                 width: 283,
                 height: 120,
-                transform: [{ translateY: -14 }, { scaleX: -1 }],
+                transform: [{ translateY: -24 }, { scaleX: -1 }],
                 position: "absolute",
                 bottom: "100%",
               }}
