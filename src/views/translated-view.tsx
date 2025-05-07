@@ -1,8 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { Audio, AVPlaybackStatus } from "expo-av";
 import { Sound } from "expo-av/build/Audio";
-import LottieView from "lottie-react-native";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Image, ScrollView, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Cat from "../components/cat";
@@ -34,18 +33,18 @@ export default function TranslatedView({
     if (playbackStatus?.isLoaded) {
       if (playbackStatus.positionMillis === playbackStatus.durationMillis) {
         await sound.replayAsync();
-        soundWave.current?.reset();
-        soundWave.current?.play();
+        // soundWave.current?.reset();
+        // soundWave.current?.play();
       } else {
         await sound.playAsync();
-        soundWave.current?.resume();
+        // soundWave.current?.resume();
       }
     }
   }
 
   async function onPause() {
     await sound.pauseAsync();
-    soundWave.current?.pause();
+    // soundWave.current?.pause();
   }
 
   useEffect(() => {
@@ -64,7 +63,7 @@ export default function TranslatedView({
   useEffect(() => {
     if (playbackStatus?.isLoaded) {
       if (!playbackStatus.isPlaying && !playbackStatus.shouldPlay) {
-        soundWave.current?.pause();
+        // soundWave.current?.pause();
       }
     }
   });
@@ -80,8 +79,6 @@ export default function TranslatedView({
 
     return unsubscribe;
   }, [navigation, sound]);
-
-  const soundWave = useRef<LottieView>(null);
 
   return (
     <TemplateView background="light" className="px-4 pb-8 pt-8">
@@ -104,15 +101,21 @@ export default function TranslatedView({
           </Text>
         </ScrollView>
         <View className="my-6 h-[1px] bg-gray-100" />
-        <View className="flex flex-row items-center justify-between">
-          <LottieView
-            source={require(`../../assets/components/sound_wave_loop.json`)}
-            ref={soundWave}
-            style={{
-              width: 236,
-              height: 43,
-            }}
-          />
+        <View className="flex flex-row items-center justify-between gap-x-4">
+          <View className="h-[5px] grow overflow-hidden rounded-lg bg-gray-200">
+            {playbackStatus?.isLoaded && playbackStatus.durationMillis && (
+              <View
+                className="bg-primary-700 h-full"
+                style={{
+                  width: `${
+                    (playbackStatus.positionMillis /
+                      playbackStatus.durationMillis) *
+                    100
+                  }%`,
+                }}
+              />
+            )}
+          </View>
           {playbackStatus &&
           playbackStatus.isLoaded &&
           playbackStatus.isPlaying ? (

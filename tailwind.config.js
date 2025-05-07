@@ -8,7 +8,7 @@ module.exports = {
           // 100: "#F1FBFB",
           300: "#E8E7F7",
           500: "#E2E3F5",
-          // 700: "#35AEBE",
+          700: "#9CA4E7",
           900: "#4651D1",
         },
         warning: {
@@ -23,6 +23,7 @@ module.exports = {
         },
         gray: {
           100: "#F3F5F7",
+          200: "#E8E8E8",
           300: "#D4D7DD",
           500: "#ABAFB5",
           700: "#5E5F66",
