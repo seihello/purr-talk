@@ -142,14 +142,25 @@ export default function RecordingView({
       </Text>
 
       <View className="flex flex-1 flex-col justify-center">
-        <LottieView
-          ref={soundWave}
-          style={{
-            width: width,
-            height: (width * 111) / 393,
-          }}
-          source={require(`../../assets/components/sound_wave.json`)}
-        />
+        {elapsedTime <= 2 ? (
+          <LottieView
+            ref={soundWave}
+            style={{
+              width: width,
+              height: (width * 111) / 393,
+            }}
+            source={require(`../../assets/components/sound_wave_grow.json`)}
+          />
+        ) : (
+          <LottieView
+            style={{
+              width: width,
+              height: (width * 111) / 393,
+            }}
+            source={require(`../../assets/components/sound_wave.json`)}
+            autoPlay
+          />
+        )}
       </View>
 
       <View className="mb-24">
