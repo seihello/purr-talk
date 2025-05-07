@@ -34,6 +34,9 @@ export default function ProfileSettingPage({ navigation }: any) {
 
   if (!profile) return;
 
+  // console.log("furColor", furColor);
+  // console.log("profile.furColor", profile.furColor);
+
   return (
     <View className="relative flex h-full w-screen flex-col items-stretch bg-[#E8E7F7] pb-8 pt-6">
       <View className="flex flex-col items-start px-6">
@@ -57,7 +60,7 @@ export default function ProfileSettingPage({ navigation }: any) {
         <RNPickerSelect
           value={furColor}
           onValueChange={(value) => {
-            setFurColor(value);
+            setFurColor(value === "null" ? undefined : value);
           }}
           items={Object.values(FurColor).map((color, index) => ({
             label: color,
